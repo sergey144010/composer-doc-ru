@@ -28,6 +28,9 @@ Composer это **не** менеджер пакетов в том же смыс
 This idea is not new and Composer is strongly inspired by node's
 [npm](https://npmjs.org/) and ruby's [bundler](http://bundler.io/).
 
+Эта идея не нова и Composer сильно вдохновлён Node
+[npm](https://npmjs.org/) и Ruby [bundler](http://bundler.io/).
+
 Suppose:
 
 1. You have a project that depends on a number of libraries.
