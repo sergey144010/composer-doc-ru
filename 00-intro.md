@@ -32,18 +32,29 @@ This idea is not new and Composer is strongly inspired by node's
 [npm](https://npmjs.org/) и Ruby [bundler](http://bundler.io/).
 
 Suppose:
+Предположим, что:
 
 1. You have a project that depends on a number of libraries.
 1. Some of those libraries depend on other libraries.
+
+1. У Вас есть проект, который зависит от некоторого числа библиотек.
+1. И некоторые из этих библиотек зависит от других библиотек.
 
 Composer:
 
 1. Enables you to declare the libraries you depend on.
 1. Finds out which versions of which packages can and need to be installed, and
    installs them (meaning it downloads them into your project).
+   
+1. Позволяет объявлять библиотеки, от которых зависит Ваш проект.
+1. Выясняет, какие версии каких пакетов можно и необходимо установить, и 
+устанавливает их (то есть он загружает их в Ваш проект).
 
 See the [Basic usage](01-basic-usage.md) chapter for more details on declaring
 dependencies.
+
+Смотрите раздел [Базовое использование](01-basic-usage.md) для более подробной информации о декларировании
+зависимостей.
 
 ## System Requirements
 
