@@ -23,7 +23,7 @@ Composer это **не** менеджер пакетов в том же смыс
 , их установка в каталог (например `vendor`) внутри вашего проекта. По
 умолчанию он не устанавливает что-либо глобально. Таким образом он является менеджером зависимостей.
 Однако он поддерживает проект "global" (глобальный) для удобства, через
-[global] (03-cli.md #global) команды.
+[global](03-cli.md#global) команды.
 
 This idea is not new and Composer is strongly inspired by node's
 [npm](https://npmjs.org/) and ruby's [bundler](http://bundler.io/).
