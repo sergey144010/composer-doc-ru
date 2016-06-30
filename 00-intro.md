@@ -167,37 +167,66 @@ mv composer.phar /usr/local/bin/composer
 > **Note:** If the above fails due to permissions, you may need to run it again
 > with sudo.
 
+> ** Примечание: ** Если команда указанная выше не удается из-за прав доступа, Вам может потребоваться запустить её снова
+> с sudo.
+
 > **Note:** On some versions of OSX the `/usr` directory does not exist by
 > default. If you receive the error "/usr/local/bin/composer: No such file or
 > directory" then you must create the directory manually before proceeding:
 > `mkdir -p /usr/local/bin`.
 
+> ** Примечание: ** В некоторых версиях OSX каталог `/usr` не существует изначально.
+> Если появляется сообщение об ошибке "/usr/local/bin/composer: No such file or
+> directory" ("/usr/local/bin/composer: Нет такого файла или директории"), то Вы должны создать эту директорию вручную прежде чем продолжить:
+> `mkdir -p /usr/local/bin`.
+
 > **Note:** For information on changing your PATH, please read the
 > [Wikipedia article](https://en.wikipedia.org/wiki/PATH_(variable)) and/or use Google.
 
+> ** Примечание: ** Для получения информации об изменении вашего PATH, пожалуйста, прочитайте
+> [Статью Википедии](https://en.wikipedia.org/wiki/PATH_(variable)) и/или используйте Google.
+
 Now just run `composer` in order to run Composer instead of `php composer.phar`.
+Теперь просто запустите `composer` для запуска Composer вместо `php composer.phar`.
 
 ## Installation - Windows
+## Установка - Windows
 
 ### Using the Installer
+### Используя программу установки
 
 This is the easiest way to get Composer set up on your machine.
+Это самый простой способ установить Composer на Вашей машине.
 
 Download and run
 [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe). It will
 install the latest Composer version and set up your PATH so that you can just
 call `composer` from any directory in your command line.
 
+Загрузите и запустите
+[Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe).
+Это установит последнюю версию Composer и настроит Ваш PATH так, что Вы можете просто вызвать `composer` из любого каталога, в командной строке.
+
 > **Note:** Close your current terminal. Test usage with a new terminal: This is
 > important since the PATH only gets loaded when the terminal starts.
 
+> ** Примечание: ** Закройте Ваш текущий терминал. Тестируйте используя новый терминал: это важно, поскольку обновленный PATH загружается только при запуске нового терминала.
+
 ### Manual Installation
+### Ручная установка
 
 Change to a directory on your `PATH` and run the installer following
 [the Download page instructions](https://getcomposer.org/download/)
 to download `composer.phar`.
 
+Перейдите в каталог Вашего `PATH` и запустите программу установки следуя
+[Инструкции страницы загрузки](https://getcomposer.org/download/)
+чтобы загрузить `composer.phar`.
+
+
 Create a new `composer.bat` file alongside `composer.phar`:
+
+Создайте новый файл `composer.bat` рядом с `composer.phar`
 
 ```sh
 C:\bin>echo @php "%~dp0composer.phar" %*>composer.bat
@@ -208,7 +237,13 @@ For information on changing your PATH variable, please see
 [this article](http://www.computerhope.com/issues/ch000549.htm) and/or
 use Google.
 
+Добавьте каталог в которой находится файл composer.bat в переменную среды PATH, если он ещё не добавлен.
+Дополнительные сведения об изменении переменной среды PATH см. в
+[этой статье](http://www.computerhope.com/issues/ch000549.htm) и/или
+используйте Google.
+
 Close your current terminal. Test usage with a new terminal:
+Закройте текущий терминал. Тестируйте комманду ниже с нового терминала:
 
 ```sh
 C:\Users\username>composer -V
@@ -216,8 +251,11 @@ Composer version 1.0.0 2016-01-10 20:34:53
 ```
 
 ## Using Composer
+## Использование Composer
 
 Now that you've installed Composer, you are ready to use it! Head on over to the
 next chapter for a short and simple demonstration.
 
-[Basic usage](01-basic-usage.md) &rarr;
+Теперь, когда Вы установили Composer, Вы готовы использовать его! Перейдите к следующей короткой главе и простой демонстрации.
+
+[Базовое использование](01-basic-usage.md) &rarr;
