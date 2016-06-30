@@ -63,15 +63,27 @@ Composer requires PHP 5.3.2+ to run. A few sensitive php settings and compile
 flags are also required, but when using the installer you will be warned about
 any incompatibilities.
 
+Composer требует для запуска PHP 5.3.2+. Немного чувствителен к свойствам php, компиляционным
+флагам, а также зависимостям, но при использовании установщика Вы будете предупреждены о
+любых несовместимостях.
+
 To install packages from sources instead of simple zip archives, you will need
 git, svn, fossil or hg depending on how the package is version-controlled.
+
+Чтобы установить пакеты из источников вместо простых zip архивов, Вам понадобится
+git, svn, fossil или hg в зависимости от того, какой пакет в какой системе управления версиями находится.
 
 Composer is multi-platform and we strive to make it run equally well on Windows,
 Linux and OSX.
 
+Composer — мультиплатформенный и мы стремимся сделать его выполнение одинаково хорошим на Windows,
+Linux и OSX.
+
 ## Installation - Linux / Unix / OSX
+## Установка - Linux / Unix / OSX
 
 ### Downloading the Composer Executable
+### Загрузка исполняемого файла Composer
 
 Composer offers a convenient installer that you can execute directly from the
 commandline. Feel free to [download this file](https://getcomposer.org/installer)
@@ -79,21 +91,39 @@ or review it on [GitHub](https://github.com/composer/getcomposer.org/blob/master
 if you wish to know more about the inner workings of the installer. The source
 is plain PHP.
 
+Composer предлагает удобный установщик, который можно выполнять непосредственно из
+командной строки. Не стесняйтесь [загрузить этот файл](https://getcomposer.org/installer)
+или просмотреть его на [GitHub](https://github.com/composer/getcomposer.org/blob/master/web/installer)
+Если Вы хотите узнать больше о внутренней работе установщика. Исходнник это простой PHP.
+
 There are in short, two ways to install Composer. Locally as part of your
 project, or globally as a system wide executable.
 
+В кратце есть два пути установки Compose. Локально как часть вашего
+проекта, или глобально как исполняемый файл системы.
+
 #### Locally
+#### Локальная установка
 
 Installing Composer locally is a matter of just running the installer in your
 project directory. See [the Download page](https://getcomposer.org/download/)
 for instructions.
+
+Установка Composer локально является просто запуском установщика в каталоге вашего проекта.
+Сморите [Страница Загрузки](https://getcomposer.org/download/) для получения инструкций.
 
 The installer will just check a few PHP settings and then download
 `composer.phar` to your working directory. This file is the Composer binary. It
 is a PHAR (PHP archive), which is an archive format for PHP which can be run on
 the command line, amongst other things.
 
+Программа установки будет просто проверять несколько PHP параметров и затем скачает
+`composer.phar` в рабочий каталог. Этот файл является двоичным. Это PHAR (архив PHP),
+который является форматом архива для PHP, который можно запускать в командной строке, среди всего другого.
+
 Now just run `php composer.phar` in order to run Composer.
+
+Теперь просто запустите `php composer.phar` для того чтобы запустить Composer.
 
 You can install Composer to a specific directory by using the `--install-dir`
 option and additionally (re)name it as well using the `--filename` option. When
@@ -101,13 +131,20 @@ running the installer when following
 [the Download page instructions](https://getcomposer.org/download/) add the
 following parameters:
 
+Вы можете установить Composer в определенный каталог, используя опцию `--install-dir`
+и кроме того переименовать его с помощью опции `--filename`.
+При запуске программы установки, следуя [Инструкциям страницы загрузки](https://getcomposer.org/download/) добавьте следующие параметры:
+
 ```sh
 php composer-setup.php --install-dir=bin --filename=composer
 ```
 
 Now just run `php bin/composer` in order to run Composer.
 
+Теперь просто запустите `php bin/composer` для того чтобы запустить Composer.
+
 #### Globally
+#### Глобальная установка
 
 You can place the Composer PHAR anywhere you wish. If you put it in a directory
 that is part of your `PATH`, you can access it globally. On unixy systems you
