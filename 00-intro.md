@@ -151,8 +151,14 @@ that is part of your `PATH`, you can access it globally. On unixy systems you
 can even make it executable and invoke it without directly using the `php`
 interpreter.
 
+Вы можете разместить  Composer PHAR везде, где пожелаете.
+Если Вы поместите его в каталог, который является частью Вашего `PATH`, Вы можете получить глобальный доступ. На Unix системах Вы можете даже сделать его исполняемым и ссылаться на него напрямую, не используя интерпретатор `php`.
+
 After running the installer following [the Download page instructions](https://getcomposer.org/download/)
 you can run this to move composer.phar to a directory that is in your path:
+
+После запуска установщика следуя [Инструкциям страницы загрузки](https://getcomposer.org/download/)
+можно переместить composer.phar в каталог, который находится в вашей директории:
 
 ```sh
 mv composer.phar /usr/local/bin/composer
