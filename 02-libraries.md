@@ -1,17 +1,29 @@
 # Libraries
+# Библиотеки
 
 This chapter will tell you how to make your library installable through
 Composer.
 
+Этот раздел расскажет Вам о том как сделать Ваши библиотеки устанавливаемыми через Composer.
+
 ## Every project is a package
+## Каждый проект является пакетом
 
 As soon as you have a `composer.json` in a directory, that directory is a
 package. When you add a [`require`](04-schema.md#require) to a project, you are
 making a package that depends on other packages. The only difference between
 your project and libraries is that your project is a package without a name.
 
+Как только у Вас в каталоге появляется `composer.json` , этот каталог становится пакетом.
+Когда Вы добавляете зависимости [`require`](04-schema.md#require) в проект, Вы создаёте
+ пакет, который зависит от других пакетов. Единственное различие между
+Вашим проектом и библиотеками в том, что Ваш проект является пакетом без имени. 
+
 In order to make that package installable you need to give it a name. You do
 this by adding the [`name`](04-schema.md#name) property in `composer.json`:
+
+Для того, чтобы сделать пакет установочным Вам нужно дать ему имя. Вы делаете
+это путем добавления свойства [`name`](04-schema.md#name) (имя) в `composer.json`:
 
 ```json
 {
@@ -25,36 +37,63 @@ this by adding the [`name`](04-schema.md#name) property in `composer.json`:
 In this case the project name is `acme/hello-world`, where `acme` is the vendor
 name. Supplying a vendor name is mandatory.
 
+В нашем случае именем проекта является `acme/hello-world`, где `acme` является именем поставщика.
+Имя поставщика является обязательным.
+
 > **Note:** If you don't know what to use as a vendor name, your GitHub
 > username is usually a good bet. While package names are case insensitive, the
 > convention is all lowercase and dashes for word separation.
 
+> **Примечание:** Если Вы не знаете, что использовать в качестве имени поставщика, Ваше имя пользователя на GitHub обычно является хорошим выбором. Имена пакетов нечувствительны к регистру, все буквы строчные и дефисы для разделения слов.
+
 ## Platform packages
+## Пакеты платформ
 
 Composer has platform packages, which are virtual packages for things that are
 installed on the system but are not actually installable by Composer. This
 includes PHP itself, PHP extensions and some system libraries.
 
+Composer имеет пакеты платформ, которые являются виртуальными пакетами для предметов, которые установлены в системе, но не фактически устанавливаемые через Composer. В это понятие включается сам PHP, PHP расширений и некоторые системные библиотеки.
+
 * `php` represents the PHP version of the user, allowing you to apply
   constraints, e.g. `>=5.4.0`. To require a 64bit version of php, you can
   require the `php-64bit` package.
+  
+* `php` представляет версию PHP пользователя, позволяя применить ограничения
+  , например `>=5.4.0`. Если требуется 64bit версия php, Вы можете
+  потребовать пакет `php-64bit`
 
 * `hhvm` represents the version of the HHVM runtime (aka HipHop Virtual
   Machine) and allows you to apply a constraint, e.g., '>=2.3.3'.
+  
+* `hhvm` представляет версию среды выполнения HHVM (aka HipHop Virtual
+  Machine) и позволяет применять ограничения, например, '>=2.3.3'.
 
 * `ext-<name>` allows you to require PHP extensions (includes core
   extensions). Versioning can be quite inconsistent here, so it's often
   a good idea to just set the constraint to `*`.  An example of an extension
   package name is `ext-gd`.
+  
+* `ext-<name>` позволяет требовать расширения PHP (включая расширения ядра).
+  Управление версиями может быть вполне согласованно здесь, так что это часто
+  хорошая идея, для того, чтобы просто установить ограничение `*`. Примером расширения
+  с именем пакета является `ext-gd`.
 
 * `lib-<name>` allows constraints to be made on versions of libraries used by
   PHP. The following are available: `curl`, `iconv`, `icu`, `libxml`,
+  `openssl`, `pcre`, `uuid`, `xsl`.
+  
+* `lib-<name>` позволяет накладывать ограничения на версии библиотек, используемых
+  PHP. Доступны следующие: `curl`, `iconv`, `icu`, `libxml`,
   `openssl`, `pcre`, `uuid`, `xsl`.
 
 You can use [`show --platform`](03-cli.md#show) to get a list of your locally
 available platform packages.
 
+Вы можете использовать [`show --platform`](03-cli.md#show) для получения списка локальных пакетов доступных на Вашей платформе.
+
 ## Specifying the version
+## Указание версии
 
 When you publish your package on Packagist, it is able to infer the version
 from the VCS (git, svn, hg, fossil) information. This means you don't have to
