@@ -131,7 +131,12 @@ created. It should match 'X.Y.Z' or 'vX.Y.Z', with an optional suffix of
 `-patch` (`-p`), `-alpha` (`-a`), `-beta` (`-b`) or `-RC`. The suffix can also
 be followed by a number.
 
+Для каждого тега, который выглядит как версия, пакет с тегом этой версии будет
+создан. Он должен соответствовать 'X.Y.Z' или 'vX.Y.Z', с необязательным суффиксом
+`-patch` (`-p`), `-alpha` (`-a`), `-beta` (`-b`) или `-RC`. За номером также может следовать суффикс.
+
 Here are a few examples of valid tag names:
+Вот несколько примеров допустимых тегов имен:
 
 - 1.0.0
 - v1.0.0
@@ -145,7 +150,12 @@ Here are a few examples of valid tag names:
 > statement has to be specified without prefix (e.g. tag `v1.0.0` will result
 > in version `1.0.0`).
 
+> **Примечание:** Даже если Ваш тег с префиксом `v`,
+> [ограничение версии](01-basic-usage.md#package-versions) (version constraint) в `require`
+> должно быть указано без префикса (например тег `v1.0.0` будет приведён в `1.0.0`).
+
 ### Branches
+### Ветви
 
 For every branch, a package development version will be created. If the branch
 name looks like a version, the version will be `{branchname}-dev`. For example,
@@ -166,6 +176,7 @@ Here are some examples of version branch names:
 > for more details.
 
 ### Aliases
+### Псевдонимы
 
 It is possible to alias branch names to versions. For example, you could alias
 `dev-master` to `1.0.x-dev`, which would allow you to require `1.0.x-dev` in
@@ -174,6 +185,7 @@ all the packages.
 See [Aliases](articles/aliases.md) for more information.
 
 ## Lock file
+##Файл блокировки
 
 For your library you may commit the `composer.lock` file if you want to. This
 can help your team to always test against the same dependency versions.
