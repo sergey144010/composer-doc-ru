@@ -100,14 +100,18 @@ all packages instead of doing per dependency you can also use the
 
 По умолчанию только стабильные релизы принимаются во внимание. Если бы Вы
 хотели бы также получить зависимости RC, beta, alpha или dev версий, Вы можете это
-сделать с помощью [флагов стабильности](04-schema.md#package-links). Чтобы применить это для
+сделать с помощью [флагов стабильности](04-schema.md#package-links) (stability flags). Чтобы применить это для
 всех пакетов, вместо того чтобы делать это для каждой зависимости, Вы также можете использовать установку
-[минимальная стабильность](04-schema.md#minimum-stability).
+[минимальная стабильность](04-schema.md#minimum-stability) (minimum-stability).
 
 ## Installing Dependencies
+## Установка зависимостей
 
 To install the defined dependencies for your project, just run the
 [`install`](03-cli.md#install) command.
+
+Чтобы установить зависимости для Вашего проекта просто запустите
+команду [`install`](03-cli.md#install)
 
 ```sh
 php composer.phar install
@@ -118,25 +122,48 @@ supplied version constraint and download it into the `vendor` directory.
 It's a convention to put third party code into a directory named `vendor`.
 In case of Monolog it will put it into `vendor/monolog/monolog`.
 
+Это найдёт последнюю версию `monolog/monolog` которая соответствует Вашим
+ограничениям для этой версии пакета и скачает его в директорию поставщика `vendor`.
+Здесь имеет место соглашение ставить код сторонних производителей в каталог с именем `vendor`.
+В случае с Monolog, он будет располагаться в `vendor/monolog/monolog`.
+
 > **Tip:** If you are using git for your project, you probably want to add
 > `vendor` in your `.gitignore`. You really don't want to add all of that
 > code to your repository.
 
+> **Совет:** Если Вы используете git для вашего проекта, Вам вероятней всего
+> необходимо добавить каталог `vendor` в  файл `.gitignore`.
+> Вы же не хотите добавить весь этот код в Ваш репозиторий.
+
 You will notice the [`install`](03-cli.md#install) command also created a
 `composer.lock` file.
 
+Вы заметите, что команда [`install`](03-cli.md#install) также создала файл `composer.lock`
+
 ## `composer.lock` - The Lock File
+## `composer.lock` - Файл блокировки
 
 After installing the dependencies, Composer writes the list of the exact
 versions it installed into a `composer.lock` file. This locks the project
 to those specific versions.
 
+После установки зависимостей Composer пишет список точных
+версий в файл `composer.lock`. Это блокирует Ваш проект
+для этих конкретных версий.
+
 **Commit your application's `composer.lock` (along with `composer.json`)
 into version control.**
+
+**`composer.lock` фиксирует Ваши приложения (наряду с `composer.json`)
+в системе контроля версий.**
 
 This is important because the [`install`](03-cli.md#install) command checks
 if a lock file is present, and if it is, it downloads the versions specified
 there (regardless of what `composer.json` says).
+
+Это важно, потому что команда ['install'](03-cli.md#install) проверяет
+присутствует ли файл блокировки, и если это так, он загружает указанные там версии
+(независимо от того, что говорит `composer.json`).
 
 This means that anyone who sets up the project will download the exact same
 version of the dependencies. Your CI server, production machines, other
@@ -146,9 +173,21 @@ deployments. Even if you develop alone, in six months when reinstalling the
 project you can feel confident the dependencies installed are still working even
 if your dependencies released many new versions since then.
 
+Это означает, что любой, кто настраивает проект будет загружать точно такие же
+версии зависимостей. Ваш CI сервер, рабочая машина, другие
+разработчики в Вашей команде, все они и всё работает на одних и тех же зависимостях,
+что снижает потенциал для ошибок, затрагивающих только некоторые части
+развертывания. Даже если Вы разрабатываете самостоятельно, через шесть месяцев при переустановке
+проекта, Вы можете быть уверены, что установленные зависимости по-прежнему работают даже
+если зависимости выпустили много новых версий с тех пор.
+
 If no `composer.lock` file exists, Composer will read the dependencies and
 versions from `composer.json` and  create the lock file after executing the
 [`update`](03-cli.md#update) or the [`install`](03-cli.md#install) command.
+
+Если файл `composer.lock` не существует, Composer будет считывать зависимости и
+версии из `composer.json` и создаст файл блокировки после выполнения
+команды [`update`](03-cli.md#update) или [`install`](03-cli.md#install).
 
 This means that if any of the dependencies get a new version, you won't get the
 updates automatically. To update to the new version, use the
@@ -156,13 +195,23 @@ updates automatically. To update to the new version, use the
 versions (according to your `composer.json` file) and also update the lock file
 with the new version.
 
+Это означает, что если какая-либо из зависимостей выпустила новую версию, Вы не получите обновления автоматически.
+Для обновления до новой версии, используйте команду [`update`](03-cli.md#update).
+Это получит последнюю соответствующую версию (в соответствии с Вашим файлом `composer.json`), а также обновит файл блокировки
+до новой версии.
+
 ```sh
 php composer.phar update
 ```
 > **Note:** Composer will display a Warning when executing an `install` command
 > if `composer.lock` and `composer.json` are not synchronized.
 
+> **Примечание:** Composer отобразит предупреждение при выполнении команды `install`
+> если `composer.lock` и `composer.json` не синхронизированы.
+
 If you only want to install or update one dependency, you can whitelist them:
+
+Если Вы хотите установить или обновить только одну зависимость, Вы можете сделать это следующим образом:
 
 ```sh
 php composer.phar update monolog/monolog [...]
@@ -170,6 +219,9 @@ php composer.phar update monolog/monolog [...]
 
 > **Note:** For libraries it is not necessary to commit the lock
 > file, see also: [Libraries - Lock file](02-libraries.md#lock-file).
+
+> **Примечание:** Для библиотек не является необходимым фиксировать файл блокировки,
+> см. также: [Библиотеки - Файл блокировки](02-libraries.md#lock-file).
 
 ## Packagist
 
