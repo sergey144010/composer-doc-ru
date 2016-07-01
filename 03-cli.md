@@ -1,4 +1,5 @@
 # Command-line interface / Commands
+# Интерфейс командной строки / Команды
 
 You've already learned how to use the command-line interface to do some
 things. This chapter documents all the available commands.
