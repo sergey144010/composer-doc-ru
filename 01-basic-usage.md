@@ -1,25 +1,42 @@
 # Basic usage
+# Базовое использование
 
 ## Introduction
+## Введение
 
 For our basic usage introduction, we will be installing `monolog/monolog`,
 a logging library. If you have not yet installed Composer, refer to the
 [Intro](00-intro.md) chapter.
 
+Для вводного ознакомления мы установим библиотеку логирования `monolog/monolog`.
+Если Вы ещё не установили Composer, обратитесь к главе [Введение](00-intro.md).
+
 > **Note:** for the sake of simplicity, this introduction will assume you
 > have performed a [local](00-intro.md#locally) install of Composer.
 
+> **Примечание:** для простоты в этом ознакомлении будем считать, что Вы
+выполнили [локальную](00-intro.md#locally) установку Composer
+
 ## `composer.json`: Project Setup
+## `composer.json`: Настройка проекта
 
 To start using Composer in your project, all you need is a `composer.json`
 file. This file describes the dependencies of your project and may contain
 other metadata as well.
 
+Чтобы начать использовать Composer в Вашем проекте, всё, что Вам нужно это `composer.json`
+файл. Этот файл описывает зависимости Вашего проекта и может содержать также другие метаданные.
+
 ### The `require` Key
+### Ключ `require`
 
 The first (and often only) thing you specify in `composer.json` is the
 [`require`](04-schema.md#require) key. You're simply telling Composer which
 packages your project depends on.
+
+Первым (и часто единственным) делом укажите в `composer.json` ключ
+[`require`](04-schema.md#require). Таким образом Вы просто говорите Composer от каких
+пакетов зависит Ваш проект.
 
 ```json
 {
@@ -33,12 +50,19 @@ As you can see, [`require`](04-schema.md#require) takes an object that maps
 **package names** (e.g. `monolog/monolog`) to **version constraints** (e.g.
 `1.0.*`).
 
+Как Вы можете видеть [`require`](04-schema.md#require) принимает объект состоящий из
+**имени пакета** (например `monolog/monolog`) и **версии пакета** (например `1.0.*`).
+
 ### Package Names
+### Имена пакетов
 
 The package name consists of a vendor name and the project's name. Often these
 will be identical - the vendor name just exists to prevent naming clashes. It
 allows two different people to create a library named `json`, which would then
 just be named `igorw/json` and `seldaek/json`.
+
+Имя пакета состоит из имени поставщика и имени проекта. Часто они будут идентичны - имя поставщика просто существует для предотвращения столкновения наименований. Это позволяет двум разным людям, создать библиотеку с одинаковым именем `json`, которая затем будет
+просто названа `igorw/json` и `seldaek/json`.
 
 Here we are requiring `monolog/monolog`, so the vendor name is the same as the
 project's name. For projects with a unique name this is recommended. It also
@@ -46,23 +70,39 @@ allows adding more related projects under the same namespace later on. If you
 are maintaining a library, this would make it really easy to split it up into
 smaller decoupled parts.
 
+Здесь мы требуем пакет `monolog/monolog`, поэтому имя поставщика совпадает с именем проекта. Для проектов с уникальным именем такой подход рекомендуется. Это также позволяет позже добавить более смежные проекты в рамках того же пространства имен. Если Вы работаете с библиотекой, это сделает её более легкой и удобной к разделению на меньшие части.
+
 ### Package Versions
+### Версии Пакетов
 
 In the previous example we were requiring version
 [`1.0.*`](http://semver.mwl.be/#?package=monolog%2Fmonolog&version=1.0.*) of
 Monolog. This means any version in the `1.0` development branch. It is the
 equivalent of saying versions that match `>=1.0 <1.1`.
 
+В предыдущем примере мы требуем версию [`1.0.*`](http://semver.mwl.be/#?package=monolog%2Fmonolog&version=1.0.*) Monolog.
+Это означает любая версия `1.0` в ветке разработки (development branch). Это
+эквивалентно сказанному - версия которая соответствует `>=1.0 <1.1`.
+
 Version constraints can be specified in several ways, read
 [versions](articles/versions.md) for more in-depth information on this topic.
 
-### Stability
+Ограничения для версий можно указать несколькими способами, читайте
+[версии](articles/versions.md) для получения более подробной информации по этой теме.
+
+### Стабильность Stability
 
 By default only stable releases are taken into consideration. If you would
 like to also get RC, beta, alpha or dev versions of your dependencies you can
 do so using [stability flags](04-schema.md#package-links). To change that for
 all packages instead of doing per dependency you can also use the
 [minimum-stability](04-schema.md#minimum-stability) setting.
+
+По умолчанию только стабильные релизы принимаются во внимание. Если бы Вы
+хотели бы также получить зависимости RC, beta, alpha или dev версий, Вы можете это
+сделать с помощью [флагов стабильности](04-schema.md#package-links). Чтобы применить это для
+всех пакетов, вместо того чтобы делать это для каждой зависимости, Вы также можете использовать установку
+[минимальная стабильность](04-schema.md#minimum-stability).
 
 ## Installing Dependencies
 
