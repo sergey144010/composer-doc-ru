@@ -230,18 +230,33 @@ repository is basically a package source: a place where you can get packages
 from. Packagist aims to be the central repository that everybody uses. This
 means that you can automatically `require` any package that is available there.
 
+[Packagist](https://packagist.org/) является главным репозиторием (хранилищем) Composer.
+Репозиторий Composer это основной источник пакетов: место, откуда Вы можете получить различные пакеты.
+Packagist стремится быть центральным репозиторием который используют все. Это
+означает, что можно автоматически затребовать `require` любой пакет который доступен здесь.
+
+
 If you go to the [Packagist website](https://packagist.org/) (packagist.org),
 you can browse and search for packages.
+
+Если вы перейдёте на [веб-сайт Packagist](https://packagist.org/) (packagist.org),
+здесь Вы можете просматривать и искать пакеты.
 
 Any open source project using Composer is recommended to publish their packages
 on Packagist. A library doesn't need to be on Packagist to be used by Composer,
 but it enables discovery and adoption by other developers more quickly.
 
+Любой проект с открытым кодом используемый с Composer рекомендуется публиковать на Packagist. Библиотекам не обязательно нужно находиться на Packagist чтобы использовать Composer, но это позволяет более быстро обнаруживать их и пробовать их другими разработчиками.
+
 ## Autoloading
+## Автозагрузка
 
 For libraries that specify autoload information, Composer generates a
 `vendor/autoload.php` file. You can simply include this file and you will get
 autoloading for free.
+
+Для библиотек которые поддерживают автозагрузку Composer создаёт файл `vendor/autoload.php`.
+Вы можете просто включить этот файл в проект и библиотека автоматически загрузится.
 
 ```php
 require __DIR__ . '/vendor/autoload.php';
@@ -251,6 +266,9 @@ This makes it really easy to use third party code. For example: If your project
 depends on Monolog, you can just start using classes from it, and they will be
 autoloaded.
 
+Это делает библиотеку очень простой в использовании третьей стороной. Например: Если Ваш проект
+зависит от Monolog, Вы можете просто начать использовать классы из него, и они будут видны.
+
 ```php
 $log = new Monolog\Logger('name');
 $log->pushHandler(new Monolog\Handler\StreamHandler('app.log', Monolog\Logger::WARNING));
@@ -259,6 +277,9 @@ $log->addWarning('Foo');
 
 You can even add your own code to the autoloader by adding an
 [`autoload`](04-schema.md#autoload) field to `composer.json`.
+
+Вы даже можете добавить собственный код для автозагрузчика путем добавления поля
+[`autoload`](04-schema.md#autoload) (автозагрузка) в `composer.json`.
 
 ```json
 {
@@ -271,17 +292,28 @@ You can even add your own code to the autoloader by adding an
 Composer will register a [PSR-4](http://www.php-fig.org/psr/psr-4/) autoloader
 for the `Acme` namespace.
 
+Composer зарегистрирует [PSR-4](http://www.php-fig.org/psr/psr-4/) автозагрузку
+для пространства имен `Acme`.
+
 You define a mapping from namespaces to directories. The `src` directory would
 be in your project root, on the same level as `vendor` directory is. An example
 filename would be `src/Foo.php` containing an `Acme\Foo` class.
+
+Вы определяете сопоставления из пространства имен в директории.
+Каталог `src` будет корнем Вашего проекта, на том же уровне, как и `vendor` каталог. Например файл `src/Foo.php` будет содержащий класс `Acme\Foo`.
 
 After adding the [`autoload`](04-schema.md#autoload) field, you have to re-run
 [`dump-autoload`](03-cli.md#dump-autoload) to re-generate the
 `vendor/autoload.php` file.
 
+После добавления поля [`autoload`](04-schema.md#autoload) (автозагрузка), нужно перезапустить [`dump-autoload`](03-cli.md#dump-autoload) для повторного создания файла `vendor/autoload.php`.
+
 Including that file will also return the autoloader instance, so you can store
 the return value of the include call in a variable and add more namespaces.
 This can be useful for autoloading classes in a test suite, for example.
+
+Включая этот файл, он также будет возвращать экземпляр автозагрузчика, так что Вы можете хранить его возвращаемое значение в переменной и добавлять больше пространств имен.
+Это может быть полезно для автоматической загрузки классов в наборе тестов, например.
 
 ```php
 $loader = require __DIR__ . '/vendor/autoload.php';
@@ -292,8 +324,12 @@ In addition to PSR-4 autoloading, Composer also supports PSR-0, classmap and
 files autoloading. See the [`autoload`](04-schema.md#autoload) reference for
 more information.
 
+В дополнение к PSR-4 автозагрузке Composer также поддерживает PSR-0, classmap и файловую автозагрузку. Смотрите  раздел [`autoload`](04-schema.md#autoload) (автозагрузка) для получения большей информации.
+
 > **Note:** Composer provides its own autoloader. If you don't want to use that
 > one, you can just include `vendor/composer/autoload_*.php` files, which return
 > associative arrays allowing you to configure your own autoloader.
 
-&larr; [Intro](00-intro.md)  |  [Libraries](02-libraries.md) &rarr;
+> **Примечание:** Composer предоставляет свой собственный автозагрузчик. Если Вы не хотите использовать его одного, Вы можете просто включить файлы `vendor/composer/autoload_*.php` которые возвращают ассоциативные массивы, позволяя Вам настроить свой собственный автозагрузчик.
+
+&larr; [Введение](00-intro.md)  |  [Библиотеки](02-libraries.md) &rarr;
