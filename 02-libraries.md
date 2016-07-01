@@ -165,15 +165,27 @@ branch would also be valid and be turned into `2.0.x-dev` as well. If the
 branch does not look like a version, it will be `dev-{branchname}`. `master`
 results in a `dev-master` version.
 
+Для каждой ветви будет создана версия пакета разработки. Если имя ветви выглядит как версия, 
+версия будет `{branchname}-dev` (branchname - имя ветви). Например ветка `2.0` получится версия `2.0.x-dev`
+( `.x` добавляется по техническим причинам, чтобы убедиться, что она распознается как ветвь).
+Ветка `2.0.x` также будет действительна и превратится соответственно в `2.0.x-dev`.
+Если ветка не выглядит как версия, она будет `dev-{branchname}`.
+Ветка `master` приводит к версии `dev-master`.
+
 Here are some examples of version branch names:
+Ниже приведены некоторые примеры имен версий веток:
 
 - 1.x
-- 1.0 (equals 1.0.x)
+- 1.0 (приравнивается к 1.0.x)
 - 1.1.x
 
 > **Note:** When you install a development version, it will be automatically
 > pulled from its `source`. See the [`install`](03-cli.md#install) command
 > for more details.
+
+> **Примечание:** При установке версии разработки (development version), 
+> это автоматически вытащит её из исходников `source`. Смотрите команду [`install`](03-cli.md#install) (установка)
+> для более подробной информации.
 
 ### Aliases
 ### Псевдонимы
@@ -182,24 +194,43 @@ It is possible to alias branch names to versions. For example, you could alias
 `dev-master` to `1.0.x-dev`, which would allow you to require `1.0.x-dev` in
 all the packages.
 
+Это возможность создания псевдонимов имён веток версий. Например, Вы можете
+создать псевдоним для `dev-master` как `1.0.x-dev`, что позволит Вам добавлять
+зависимость в пакетах как `1.0.x-dev`.
+
 See [Aliases](articles/aliases.md) for more information.
+Смотрите [Псевдонимы](articles/aliases.md) для более подробной информации.
 
 ## Lock file
-##Файл блокировки
+## Файл блокировки
 
 For your library you may commit the `composer.lock` file if you want to. This
 can help your team to always test against the same dependency versions.
 However, this lock file will not have any effect on other projects that depend
 on it. It only has an effect on the main project.
 
+Для вашей библиотеки Вы можете зафиксировать файл `composer.lock` если хотите.
+Это поможет Вашей команде проверить отношения одной и той же версии зависимостей.
+Однако этот файл блокировки не будет иметь никакого влияния на другие проекты, которые зависят от него.
+Он только влияет на основной проект.
+
 If you do not want to commit the lock file and you are using git, add it to
 the `.gitignore`.
 
+Если Вы не хотите фиксировать файл блокировки и используете git, добавьте его в
+`.gitignore`.
+
 ## Publishing to a VCS
+## Публикация в VCS
 
 Once you have a VCS repository (version control system, e.g. git) containing a
 `composer.json` file, your library is already composer-installable. In this
 example we will publish the `acme/hello-world` library on GitHub under
+`github.com/username/hello-world`.
+
+Как только у Вас появится VCS репозиторий (система управления версиями, например git) содержащий
+файл `composer.json`, Ваша библиотека уже может быть установлена через Composer. В этом
+примере, мы будем публиковать библиотеку `acme/hello-world` на GitHub под
 `github.com/username/hello-world`.
 
 Now, to test installing the `acme/hello-world` package, we create a new
@@ -207,6 +238,12 @@ project locally. We will call it `acme/blog`. This blog will depend on
 `acme/hello-world`, which in turn depends on `monolog/monolog`. We can
 accomplish this by creating a new `blog` directory somewhere, containing a
 `composer.json`:
+
+Теперь, чтобы проверить установку пакета `acme/hello-world`, мы создаем новый
+локальный проект. Будем называть его `acme/blog`. Этот блог будет зависеть от
+`acme/hello-world`, который в свою очередь зависит от `monolog/monolog`. Мы можем
+добиться этого путем создания где-то нового каталога `blog`,
+содержащего `composer.json` со следующим содержанием:
 
 ```json
 {
@@ -221,8 +258,16 @@ The name is not needed in this case, since we don't want to publish the blog
 as a library. It is added here to clarify which `composer.json` is being
 described.
 
+Имя в этом случае не требуется, поскольку мы не хотим публиковать блог
+как библиотеку. Имя здесь добавляется чтобы уточнить, какие `composer.json`
+в настоящее время описываются.
+
 Now we need to tell the blog app where to find the `hello-world` dependency.
 We do this by adding a package repository specification to the blog's
+`composer.json`:
+
+Теперь мы должны сообщить приложению блог где найти зависимость `hello-world`.
+Мы делаем это путем добавления репозитория в спецификации пакета блога
 `composer.json`:
 
 ```json
@@ -243,14 +288,24 @@ We do this by adding a package repository specification to the blog's
 For more details on how package repositories work and what other types are
 available, see [Repositories](05-repositories.md).
 
+Для более подробной информации о том, как работают репозитории пакетов и какие другие типы
+доступны, см. [Репозитории](05-repositories.md).
+
 That's all. You can now install the dependencies by running Composer's
 [`install`](03-cli.md#install) command!
+
+Вот и все. Теперь можно установить зависимости, запустив команду Composer
+[`install`](03-cli.md#install) !
 
 **Recap:** Any git/svn/hg/fossil repository containing a `composer.json` can be
 added to your project by specifying the package repository and declaring the
 dependency in the [`require`](04-schema.md#require) field.
 
+**Резюме:** Любой репозиторий git/svn/hg/fossil содержащий `composer.json` может быть
+добавлен в Ваш проект, указав репозитории пакетов и объявив зависимости в поле [`require`](04-schema.md#require).
+
 ## Publishing to packagist
+## Публикация в packagist
 
 Alright, so now you can publish packages. But specifying the VCS repository
 every time is cumbersome. You don't want to force all your users to do that.
