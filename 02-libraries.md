@@ -100,8 +100,16 @@ from the VCS (git, svn, hg, fossil) information. This means you don't have to
 explicitly declare it. Read [tags](#tags) and [branches](#branches) to see how
 version numbers are extracted from these.
 
+Когда вы публикуете Ваш пакет на Packagist, он выводит информацию о версии
+из VCS (git, svn, hg, fossil). Это означает, что Вам не придется
+явно объявлять это. Читайте [tags](#tags) (теги) и [branches](#branches) (ветки) чтобы увидеть, как
+номера версий извлекаются из них.
+
 If you are creating packages by hand and really have to specify it explicitly,
 you can just add a `version` field:
+
+Если Вы создаете пакеты вручную и действительно нужно указать его явно, то
+можно просто добавить поле `version` (версии):
 
 ```json
 {
@@ -112,7 +120,11 @@ you can just add a `version` field:
 > **Note:** You should avoid specifying the version field explicitly, because
 > for tags the value must match the tag name.
 
+> **Примечание:** Вы должны избегать явных указаний полей версий потому,
+> что для тегов значение должно совпадать с именем тега.
+
 ### Tags
+### Теги
 
 For every tag that looks like a version, a package version of that tag will be
 created. It should match 'X.Y.Z' or 'vX.Y.Z', with an optional suffix of
