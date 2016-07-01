@@ -310,8 +310,14 @@ dependency in the [`require`](04-schema.md#require) field.
 Alright, so now you can publish packages. But specifying the VCS repository
 every time is cumbersome. You don't want to force all your users to do that.
 
+Хорошо, теперь Вы можете публиковать пакеты. Но указывать VCS репозитории
+каждый раз слишком громоздко. Вы же не хотите заставлять всех пользователей делать это.
+
 The other thing that you may have noticed is that we did not specify a package
 repository for `monolog/monolog`. How did that work? The answer is Packagist.
+
+Вы наверное заметили, что мы не указывали репозиторий пакетов для `monolog/monolog`.
+Как это работает? Ответ - Packagist.
 
 [Packagist](https://packagist.org/) is the main package repository for
 Composer, and it is enabled by default. Anything that is published on
@@ -319,13 +325,27 @@ Packagist is available automatically through Composer. Since
 [Monolog is on Packagist](https://packagist.org/packages/monolog/monolog), we
 can depend on it without having to specify any additional repositories.
 
+[Packagist](https://packagist.org/) является основным репозиторием пакетов для
+Composer и он включен по умолчанию. Всё, что публикуется на
+Packagist автоматически доступно через Composer. Начиная с
+[Monolog находится на Packagist](https://packagist.org/packages/monolog/monolog), мы
+можем положиться на него без указания каких-либо дополнительных репозиториев.
+
 If we wanted to share `hello-world` with the world, we would publish it on
 Packagist as well. Doing so is really easy.
+
+Если мы захотим поделиться с миром пакетом `hello-world`, мы опубликуем его на packagist.
+Сделать это очень легко.
 
 You simply visit [Packagist](https://packagist.org) and hit the "Submit"
 button. This will prompt you to sign up if you haven't already, and then
 allows you to submit the URL to your VCS repository, at which point Packagist
 will start crawling it. Once it is done, your package will be available to
 anyone!
+
+Просто посетите [Packagist](https://packagist.org) и нажмите
+кнопку "Submit" (Отправить). Это поможет Вам зарегистрироваться, если Вы еще не сделали этого, а затем
+позволит добавить URL в ваш VCS репозиторий, с этой точки Packagist
+начнёт сканирование его. Как только это будет сделано, Ваш пакет будет доступен для всех!
 
 &larr; [Базовое использование](01-basic-usage.md) |  [Интерфейс командной строки](03-cli.md) &rarr;
