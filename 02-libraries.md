@@ -328,4 +328,4 @@ allows you to submit the URL to your VCS repository, at which point Packagist
 will start crawling it. Once it is done, your package will be available to
 anyone!
 
-&larr; [Basic usage](01-basic-usage.md) |  [Command-line interface](03-cli.md) &rarr;
+&larr; [Базовое использование](01-basic-usage.md) |  [Интерфейс командной строки](03-cli.md) &rarr;
