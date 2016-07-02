@@ -51,7 +51,7 @@ The following options are available with every command:
 * **2:** Dependency solving error code
 
 * **0:** OK
-* **1:** Generic/unknown error code - Обшая/неизвестная ошибка
+* **1:** Generic/unknown error code - Общая/неизвестная ошибка
 * **2:** Dependency solving error code - Неразрешенные зависимости
 
 ## init - Инициализация
@@ -127,7 +127,7 @@ everyone using the library will get the same versions of the dependencies.
 If there is no `composer.lock` file, Composer will create one after dependency
 resolution.
 
-Если отсутствует файл `composer.lock`, Composer создаст его после разрешение зависимостей.
+Если отсутствует файл `composer.lock`, Composer создаст его после разрешения зависимостей.
 
 ### Options
 ### Параметры
