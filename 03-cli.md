@@ -54,7 +54,7 @@ The following options are available with every command:
 * **1:** Generic/unknown error code - Общая/неизвестная ошибка
 * **2:** Dependency solving error code - Неразрешенные зависимости
 
-## Параметр init
+## Команда init
 
 In the [Libraries](02-libraries.md) chapter we looked at how to create a
 `composer.json` by hand. There is also an `init` command available that makes
@@ -104,7 +104,7 @@ php composer.phar init
 на репозиторий `composer` либо JSON строка, которая похожа на ключи в
 [репозитории](04-schema.md#repositories).
 
-## Параметр install
+## Команда install
 
 The `install` command reads the `composer.json` file from the current
 directory, resolves the dependencies, and installs them into `vendor`.
@@ -187,10 +187,13 @@ resolution.
 * **--classmap-authoritative (-a):** Автозагрузка классов только из classmap.
   Неявно включает `--optimize-autoloader`.
 
-## Параметр update
+## Команда update
 
 In order to get the latest versions of the dependencies and to update the
 `composer.lock` file, you should use the `update` command.
+
+Для того, чтобы получить самые последние версии зависимостей и обновить
+файл `composer.lock`, Вы должны использовать команду `update`.
 
 ```sh
 php composer.phar update
@@ -199,7 +202,12 @@ php composer.phar update
 This will resolve all dependencies of the project and write the exact versions
 into `composer.lock`.
 
+Это разрешит все зависимости проекта и запишет точные версии
+в `composer.lock`.
+
 If you just want to update a few packages and not all, you can list them as such:
+
+Если Вы просто хотите обновить не все, а несколько пакетов, Вы можете перечислить их таким образом:
 
 ```sh
 php composer.phar update vendor/package vendor/package2
@@ -207,11 +215,14 @@ php composer.phar update vendor/package vendor/package2
 
 You can also use wildcards to update a bunch of packages at once:
 
+Также можно использовать подстановочные знаки для обновления кучи пакетов одновременно:
+
 ```sh
 php composer.phar update vendor/*
 ```
 
 ### Options
+### Параметры
 
 * **--prefer-source:** Install packages from `source` when available.
 * **--prefer-dist:** Install packages from `dist` when available.
@@ -237,11 +248,39 @@ php composer.phar update vendor/*
 * **--prefer-stable:** Prefer stable versions of dependencies.
 * **--prefer-lowest:** Prefer lowest versions of dependencies. Useful for testing minimal
   versions of requirements, generally used with `--prefer-stable`.
+  
+* **--prefer-source:** Установить пакеты из `source` если это возможно.
+* **--prefer-dist:** Установить пакеты из `dist` если это возможно.
+++++++++ повторяется +++++++++
+* **--ignore-platform-reqs:** ignore `php`, `hhvm`, `lib-*` and `ext-*`
+  requirements and force the installation even if the local machine does not
+  fulfill these. See also the [`platform`](06-config.md#platform) config option.
+* **--dry-run:** Simulate the command without actually doing anything.
+* **--dev:** Install packages listed in `require-dev` (this is the default behavior).
+* **--no-dev:** Skip installing packages listed in `require-dev`. The autoloader generation skips the `autoload-dev` rules.
+* **--no-autoloader:** Skips autoloader generation.
+* **--no-scripts:** Skips execution of scripts defined in `composer.json`.
+* **--no-progress:** Removes the progress display that can mess with some
+  terminals or scripts which don't handle backspace characters.
+* **--optimize-autoloader (-o):** Convert PSR-0/4 autoloading to classmap to get a faster
+  autoloader. This is recommended especially for production, but can take
+  a bit of time to run so it is currently not done by default.
+* **--classmap-authoritative (-a):** Autoload classes from the classmap only.
+  Implicitly enables `--optimize-autoloader`.
++++++++++++++
+* **--lock:** Обновляет только хэш файла блокировки для подавления предупреждений о устаревшем файле блокировки.
+* **--with-dependencies:** Добавляет также все зависимости пакетов whitelisted в белый список (whitelist).
+* **--root-reqs:** Ограничивает обновление Ваших первых уровней зависимостей.
+* **--prefer-stable:** Отдавать предпочтение стабильным версиям зависимостей.
+* **--prefer-lowest:** Отдавать предпочтение более низким версиям зависимостей. Используется для тестирования работы с зависимостями минимальных версий, как правило используется с `--prefer-stable`.
 
-## require
+## Команда require
 
 The `require` command adds new packages to the `composer.json` file from
 the current directory. If no file exists one will be created on the fly.
+
+Команда `require` добавляет новые пакеты в файл `composer.json` из текущей директории.
+Если файла не существует он будет создан на лету.
 
 ```sh
 php composer.phar require
@@ -250,14 +289,22 @@ php composer.phar require
 After adding/changing the requirements, the modified requirements will be
 installed or updated.
 
+После добавления/изменения зависимостей, измененные зависимости будут
+установлены или обновлены.
+
 If you do not want to choose requirements interactively, you can just pass them
 to the command.
+
+Если Вы не хотите набирать требования в интерактивном режиме, Вы можете просто передать их в команду.
 
 ```sh
 php composer.phar require vendor/package:2.* vendor/package2:dev-master
 ```
 
 ### Options
+### Параметры
+
+параметры повторяются
 
 * **--prefer-source:** Install packages from `source` when available.
 * **--prefer-dist:** Install packages from `dist` when available.
@@ -282,10 +329,12 @@ php composer.phar require vendor/package:2.* vendor/package2:dev-master
 * **--prefer-lowest:** Prefer lowest versions of dependencies. Useful for testing minimal
   versions of requirements, generally used with `--prefer-stable`.
 
-## remove
+## Команда remove
 
 The `remove` command removes packages from the `composer.json` file from
 the current directory.
+
+Команда `remove` удаляет пакеты из файла `composer.json` в текущей директории.
 
 ```sh
 php composer.phar remove vendor/package vendor/package2
@@ -294,7 +343,13 @@ php composer.phar remove vendor/package vendor/package2
 After removing the requirements, the modified requirements will be
 uninstalled.
 
+После удаления зависимостей из файла, эти зависимости будут удалены из проекта.
+
 ### Options
+### Параметры
+
+параметры повторяются
+
 * **--ignore-platform-reqs:** ignore `php`, `hhvm`, `lib-*` and `ext-*`
   requirements and force the installation even if the local machine does not
   fulfill these. See also the [`platform`](06-config.md#platform) config option.
@@ -311,7 +366,7 @@ uninstalled.
 * **--classmap-authoritative (-a):** Autoload classes from the classmap only.
   Implicitly enables `--optimize-autoloader`.
 
-## global
+## Команда global
 
 The global command allows you to run other commands like `install`, `require`
 or `update` as if you were running them from the [COMPOSER_HOME](#composer-home)
