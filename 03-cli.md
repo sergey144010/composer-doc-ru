@@ -44,7 +44,7 @@ The following options are available with every command:
 * **--version (-V):** Отобразить версию приложения.
 
 ## Process Exit Codes
-## Коды выхода процесса
+## Коды выхода процесса - Коды возврата
 
 * **0:** OK
 * **1:** Generic/unknown error code
@@ -54,7 +54,7 @@ The following options are available with every command:
 * **1:** Generic/unknown error code - Общая/неизвестная ошибка
 * **2:** Dependency solving error code - Неразрешенные зависимости
 
-## init - Инициализация
+## Параметр init
 
 In the [Libraries](02-libraries.md) chapter we looked at how to create a
 `composer.json` by hand. There is also an `init` command available that makes
@@ -104,8 +104,7 @@ php composer.phar init
 на репозиторий `composer` либо JSON строка, которая похожа на ключи в
 [репозитории](04-schema.md#repositories).
 
-## install
-## Установка
+## Параметр install
 
 The `install` command reads the `composer.json` file from the current
 directory, resolves the dependencies, and installs them into `vendor`.
@@ -168,31 +167,27 @@ resolution.
   Если `--prefer-source` разрешено, Composer будет устанавливать из `source` если таковой имеется.
   Это полезно, если вы хотите внести исправление в проект и получить местные git 
   клон зависимости непосредственно.
-* **--prefer-dist:** Reverse of `--prefer-source`, Composer will install
-  from `dist` if possible. This can speed up installs substantially on build
-  servers and other use cases where you typically do not run updates of the
-  vendors. It is also a way to circumvent problems with git if you do not
-  have a proper setup.
-* **--ignore-platform-reqs:** ignore `php`, `hhvm`, `lib-*` and `ext-*`
-  requirements and force the installation even if the local machine does not
-  fulfill these. See also the [`platform`](06-config.md#platform) config option.
-* **--dry-run:** If you want to run through an installation without actually
-  installing a package, you can use `--dry-run`. This will simulate the
-  installation and show you what would happen.
-* **--dev:** Install packages listed in `require-dev` (this is the default behavior).
-* **--no-dev:** Skip installing packages listed in `require-dev`. The autoloader
-  generation skips the `autoload-dev` rules.
-* **--no-autoloader:** Skips autoloader generation.
-* **--no-scripts:** Skips execution of scripts defined in `composer.json`.
-* **--no-progress:** Removes the progress display that can mess with some
-  terminals or scripts which don't handle backspace characters.
-* **--optimize-autoloader (-o):** Convert PSR-0/4 autoloading to classmap to get a faster
-  autoloader. This is recommended especially for production, but can take
-  a bit of time to run so it is currently not done by default.
-* **--classmap-authoritative (-a):** Autoload classes from the classmap only.
-  Implicitly enables `--optimize-autoloader`.
+* **--prefer-dist:** Противоположность `--prefer-source`, Composer будет устанавливать
+  из `dist` если это возможно. Это может существенно ускорить устанавку на сборках
+  серверов и в других случаях, где обычно не запускаются обновления вендоров.
+  Это также способ, для обхода проблем с git, если Вы не имеете возможности для правильной установки.
+* **--ignore-platform-reqs:** Игнорировать `php`, `hhvm`, `lib-*` and `ext-*`
+  зависимости и принудительно установить даже если локальная машина не выполнит это.
+  Смотрите также конфигурационный параметр [`platform`](06-config.md#platform).
+* **--dry-run:** Если Вы хотите запустить установку пакета без фактической
+  установки, Вы можете использовать `--dry-run`. Это симитирует установку и
+  покажет Вам, что произойдет.
+* **--dev:** Установить пакеты перечисленные в `require-dev` (это поведение по умолчанию).
+* **--no-dev:** Пропустить установку пакетов перечисленных в `require-dev`. Автозагрузчик пропустит сгенерированные правила `autoload-dev`.
+* **--no-autoloader:** Пропустить сгенерированный автозагрузчик.
+* **--no-scripts:** Пропускать выполнение скриптов определенных в `composer.json`.
+* **--no-progress:** Удаляет отображение прогресса, который может возиться с некоторыми
+  терминалами или сценариями, которые не обрабатывают символы возврата.
+* **--optimize-autoloader (-o):** Преобразует PSR-0/4 classmap автозагрузчики, чтобы получить быстрый автозагрузчик. Это особенно рекомендуется для режима production, но может занять немного больше времени для запуска, так что в настоящее время это не делается по умолчанию.
+* **--classmap-authoritative (-a):** Автозагрузка классов только из classmap.
+  Неявно включает `--optimize-autoloader`.
 
-## update
+## Параметр update
 
 In order to get the latest versions of the dependencies and to update the
 `composer.lock` file, you should use the `update` command.
