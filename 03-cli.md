@@ -4,13 +4,22 @@
 You've already learned how to use the command-line interface to do some
 things. This chapter documents all the available commands.
 
+Вы уже научились использовать интерфейс командной строки для выполнения некоторых
+операций. В этой главе задокументированы все доступные команды.
+
 To get help from the command-line, simply call `composer` or `composer list`
 to see the complete list of commands, then `--help` combined with any of those
 can give you more information.
 
+Чтобы получить справку в командной строке, просто вызовите `composer` или `composer list`
+и увидите полный список доступных команд, затем `--help` в сочетании с любой из этих команд
+даст Вам более подробную информацию по команде.
+
 ## Global Options
+## Глобальные параметры
 
 The following options are available with every command:
+Следующие параметры доступны с каждой командой:
 
 * **--verbose (-v):** Increase verbosity of messages.
 * **--help (-h):** Display help information.
@@ -23,26 +32,50 @@ The following options are available with every command:
 * **--no-ansi:** Disable ANSI output.
 * **--version (-V):** Display this application version.
 
+* **--verbose (-v):** Увеличение детализации сообщений.
+* **--help (-h):** Отображения справочной информации.
+* **--quiet (-q):** Не выводить никаких сообщений.
+* **--no-interaction (-n):** Не спрашивать ничего в интерактивном режиме.
+* **--no-plugins:** Отключить плагины.
+* **--working-dir (-d):** Если указано, использовать заданный каталог в качестве рабочего каталога.
+* **--profile:** Отображает сведения об использовании времени и памяти.
+* **--ansi:** Принудительный вывод в ANSI.
+* **--no-ansi:** Отключить ANSI вывод.
+* **--version (-V):** Отобразить версию приложения.
+
 ## Process Exit Codes
+## Коды выхода процесса
 
 * **0:** OK
 * **1:** Generic/unknown error code
 * **2:** Dependency solving error code
 
-## init
+* **0:** OK
+* **1:** Generic/unknown error code - Обшая/неизвестная ошибка
+* **2:** Dependency solving error code - Неразрешенные зависимости
+
+## init - Инициализация
 
 In the [Libraries](02-libraries.md) chapter we looked at how to create a
 `composer.json` by hand. There is also an `init` command available that makes
 it a bit easier to do this.
 
+В разделе [Библиотеки](02-libraries.md) мы рассмотрели, как создать
+`composer.json` вручную. Существует также доступная команда `init`, которая делает
+этот процесс немного проще.
+
 When you run the command it will interactively ask you to fill in the fields,
 while using some smart defaults.
+
+Когда Вы запускаете команду она интерактивно попросит Вас заполнить некоторые поля,
+а некоторые параметры использует по умолчанию.
 
 ```sh
 php composer.phar init
 ```
 
 ### Options
+### Параметры
 
 * **--name:** Name of the package.
 * **--description:** Description of the package.
@@ -57,11 +90,28 @@ php composer.phar init
   the list of requires. Every repository can be either an HTTP URL pointing
   to a `composer` repository or a JSON string which similar to what the
   [repositories](04-schema.md#repositories) key accepts.
+  
+* **--name:** Название пакета.
+* **--description:** Описание пакета.
+* **--author:** Имя автора пакета.
+* **--homepage:** Домашняя страница пакета.
+* **--require:** Зависимоть пакета с ограничением версии. Должно быть в формате `foo/bar:1.0.0`.
+* **--require-dev:** Development зависимость, см. **--require**.
+* **--stability (-s):** Значение для поля `minimum-stability`.
+* **--repository:** Включает один (или более) пользовательских репозиториев. Они будут храниться
+в созданном composer.json и используются автоматически при выполнении запроса для
+списка зависимостей. Каждый репозиторий может быть либо HTTP URL и указывать
+на репозиторий `composer` либо JSON строка, которая похожа на ключи в
+[репозитории](04-schema.md#repositories).
 
 ## install
+## Установка
 
 The `install` command reads the `composer.json` file from the current
 directory, resolves the dependencies, and installs them into `vendor`.
+
+Команда `install` считывает файл `composer.json` из текущего каталога,
+разрешает зависимости и устанавливает их в `vendor`.
 
 ```sh
 php composer.phar install
@@ -71,10 +121,16 @@ If there is a `composer.lock` file in the current directory, it will use the
 exact versions from there instead of resolving them. This ensures that
 everyone using the library will get the same versions of the dependencies.
 
+Если в текущем каталоге есть файл `composer.lock`, будут установлены точные версии зависимостей из этого файла.
+Это гарантирует, что каждый кто использует данную библиотеку получит те же версии зависимостей этой библиотеки.
+
 If there is no `composer.lock` file, Composer will create one after dependency
 resolution.
 
+Если отсутствует файл `composer.lock`, Composer создаст его после разрешение зависимостей.
+
 ### Options
+### Параметры
 
 * **--prefer-source:** There are two ways of downloading a package: `source`
   and `dist`. For stable versions Composer will use the `dist` by default.
@@ -82,6 +138,36 @@ resolution.
   enabled, Composer will install from `source` if there is one. This is
   useful if you want to make a bugfix to a project and get a local git
   clone of the dependency directly.
+* **--prefer-dist:** Reverse of `--prefer-source`, Composer will install
+  from `dist` if possible. This can speed up installs substantially on build
+  servers and other use cases where you typically do not run updates of the
+  vendors. It is also a way to circumvent problems with git if you do not
+  have a proper setup.
+* **--ignore-platform-reqs:** ignore `php`, `hhvm`, `lib-*` and `ext-*`
+  requirements and force the installation even if the local machine does not
+  fulfill these. See also the [`platform`](06-config.md#platform) config option.
+* **--dry-run:** If you want to run through an installation without actually
+  installing a package, you can use `--dry-run`. This will simulate the
+  installation and show you what would happen.
+* **--dev:** Install packages listed in `require-dev` (this is the default behavior).
+* **--no-dev:** Skip installing packages listed in `require-dev`. The autoloader
+  generation skips the `autoload-dev` rules.
+* **--no-autoloader:** Skips autoloader generation.
+* **--no-scripts:** Skips execution of scripts defined in `composer.json`.
+* **--no-progress:** Removes the progress display that can mess with some
+  terminals or scripts which don't handle backspace characters.
+* **--optimize-autoloader (-o):** Convert PSR-0/4 autoloading to classmap to get a faster
+  autoloader. This is recommended especially for production, but can take
+  a bit of time to run so it is currently not done by default.
+* **--classmap-authoritative (-a):** Autoload classes from the classmap only.
+  Implicitly enables `--optimize-autoloader`.
+  
+* **--prefer-source:** Существует два способа загрузки пакета: `source` и `dist`.
+  Для стабильных версий Composer будет использовать `dist` по умолчанию.
+  `source` является репозиторием управления версиями.
+  Если `--prefer-source` разрешено, Composer будет устанавливать из `source` если таковой имеется.
+  Это полезно, если вы хотите внести исправление в проект и получить местные git 
+  клон зависимости непосредственно.
 * **--prefer-dist:** Reverse of `--prefer-source`, Composer will install
   from `dist` if possible. This can speed up installs substantially on build
   servers and other use cases where you typically do not run updates of the
