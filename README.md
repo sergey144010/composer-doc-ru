@@ -9,7 +9,7 @@ Composer version 1.2-dev (d31011106cc6e81e37e233108eced978c618f9d1) 2016-06-29 1
 
 [Введение](00-intro.md)
 
-Правим [Базовое использование](01-basic-usage.md)
+[Базовое использование](01-basic-usage.md)
 
 Правим [Библиотеки](02-libraries.md)
 
