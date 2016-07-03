@@ -372,10 +372,20 @@ The global command allows you to run other commands like `install`, `require`
 or `update` as if you were running them from the [COMPOSER_HOME](#composer-home)
 directory.
 
+Команда global позволяет запускать другие команды такие как `install`, `require`
+или `update` как если бы Вы запускали их из директории [COMPOSER_HOME](#composer-home).
+
 This is merely a helper to manage a project stored in a central location that
 can hold CLI tools or Composer plugins that you want to have available everywhere.
 
+!!! Перевести
+Это просто вспомогательный для управления проектом, хранится в центральном расположении,
+может содержать инструменты CLI или Composer плагинов, которые вы хотите иметь доступны везде.
+!!!
+
 This can be used to install CLI utilities globally. Here is an example:
+
+Это может использоваться для установки глобальных утилит CLI. Вот пример:
 
 ```sh
 php composer.phar global require fabpot/php-cs-fixer
@@ -384,6 +394,10 @@ php composer.phar global require fabpot/php-cs-fixer
 Now the `php-cs-fixer` binary is available globally. Just make sure your global
 [vendor binaries](articles/vendor-binaries.md) directory is in your `$PATH`
 environment variable, you can get its location with the following command :
+
+Теперь `php-cs-fixer` бинарник доступен глобально. Просто убедитесь, что Ваш глобальный
+[vendor binaries](articles/vendor-binaries.md) находится в вашей переменной среды `$PATH`,
+Вы можете получить его местоположение с помощью следующей команды:
 
 ```sh
 php composer.phar global config bin-dir --absolute
