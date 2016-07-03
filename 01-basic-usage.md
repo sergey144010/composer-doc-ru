@@ -1,7 +1,8 @@
-# Basic usage
+[Оригинал](https://github.com/composer/composer/blob/master/doc/01-basic-usage.md)
+[Оглавление](https://github.com/sergey144010/composer-doc-ru)
+
 # Базовое использование
 
-## Introduction
 ## Введение
 
 For our basic usage introduction, we will be installing `monolog/monolog`,
