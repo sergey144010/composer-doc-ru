@@ -1,3 +1,6 @@
+[Оригинал](https://github.com/composer/composer/blob/master/doc/03-cli.md)
+[Оглавление](https://github.com/sergey144010/composer-doc-ru)
+
 # Command-line interface / Commands
 # Интерфейс командной строки / Команды
 
@@ -405,15 +408,19 @@ php composer.phar global config bin-dir --absolute
 
 If you wish to update the binary later on you can just run a global update:
 
+Если Вы захотите потом обновить бинарник, можете просто запустить глобальное обновление:
+
 ```sh
 php composer.phar global update
 ```
 
-## search
+## Команда search
 
 The search command allows you to search through the current project's package
 repositories. Usually this will be just packagist. You simply pass it the
 terms you want to search for.
+
+Команда search (поиск) позволяет искать через репозитории пакеты текущего проекта. Обычно это будет только packagist. Вы просто передаёте условия, которые нужны для поиска.
 
 ```sh
 php composer.phar search monolog
@@ -421,19 +428,25 @@ php composer.phar search monolog
 
 You can also search for more than one term by passing multiple arguments.
 
+Вы также можете искать более чем один пакет, передав несколько аргументов.
+
 ### Options
+### Параметры
 
-* **--only-name (-N):** Search only in name.
+* **--only-name (-N):** Искать только в названии.
 
-## show
+## Команда show
 
 To list all of the available packages, you can use the `show` command.
+Чтобы получить список всех доступных пакетов, можно использовать команду `show`.
 
 ```sh
 php composer.phar show
 ```
 
 To filter the list you can pass a package mask using wildcards.
+
+Для фильтрации списка можно передать масу пакетов с использованием подстановочных знаков.
 
 ```sh
 php composer.phar show monolog/*
@@ -443,6 +456,8 @@ monolog/monolog 1.19.0 Sends your logs to files, sockets, inboxes, databases and
 
 If you want to see the details of a certain package, you can pass the package
 name.
+
+Если хотите увидеть детали определенного пакета, можете передать имя пакета.
 
 ```sh
 php composer.phar show monolog/monolog
@@ -466,11 +481,14 @@ php >=5.3.0
 You can even pass the package version, which will tell you the details of that
 specific version.
 
+Вы даже можете передать версию пакета, чтобы получить сведения о конкретной версии.
+
 ```sh
 php composer.phar show monolog/monolog 1.0.2
 ```
 
 ### Options
+### Параметры
 
 * **--latest (-l):** List all installed packages including their latest version.
 * **--all (-a):** List all packages available in all your repositories.
@@ -483,34 +501,63 @@ php composer.phar show monolog/monolog 1.0.2
 * **--outdated (-o):** Implies --latest, but this lists *only* packages that have a newer version available.
 * **--direct (-D):** Restricts the list of packages to your direct dependencies.
 
-## outdated
+
+* **--latest (-l):** Список всех установленных пакетов, включая их последнюю версию.
+* **--all (-a):** Список всех доступных пакетов в вашем репозиториии.
+* **--installed (-i):** Список установленных пакетов (это включено по умолчанию и нерекомендуется).
+* **--platform (-p):** Список только пакетов платформы (php & расширений).
+* **--self (-s):** Список информации корневого пакета.
+* **--tree (-t):** Список зависимостей в виде дерева. Если передать имя пакета, будет показано дерево зависимостей для этого пакета.
+* **--name-only (-N):** Список только имён пакетов.
+* **--path (-P):** Список путей пакетов.
+* **--outdated (-o):** Подразумевается --latest (последняя), но это список *только* пакетов, которые имеют более новые версии.
+* **--direct (-D):** Ограничивает список пакетов для прямых зависимостей.
+
+## Команда outdated
 
 The `outdated` command shows a list of installed packages that have updates available,
 including their current and latest versions. This is basically an alias for
 `composer show -lo`.
 
+Команда `outdated` показывает список установленных пакетов, для которых доступны обновления, включая их текущие и последние версии обновлений. В основном это псевдоним для `composer show -lo`.
+
 The color coding is as such:
+
+Цвета говорят о следующем:
 
 - **green**: Dependency is in the latest version and is up to date.
 - **yellow**: Dependency has a new version available that includes backwards compatibility breaks according to semver, so upgrade when
   you can but it may involve work.
 - **red**: Dependency has a new version that is semver-compatible and you should upgrade it.
 
+- **зелёный**: Это последняя версия зависимости на сегодняшний день.
+- **жёлтый**: Зависимость имеет новую версию, которая включает в себя обратную совместимость, поэтому обновляйтесь, когда сможете и можете включать её в работу.
+- **красный**: Зависимость имеет новую версию которая semver-compatible и вы должны обновить её.
+
 ### Options
+### Параметры
 
 * **--all (-a):** Show all packages, not just outdated (alias for `composer show -l`).
 * **--direct (-D):** Restricts the list of packages to your direct dependencies.
 
-## browse / home
+* **--all (-a):** Показать все пакеты, не только устаревшие (псевдоним для `composer show -l`).
+* **--direct (-D):** Ограничивает список пакетов для прямых зависимостей.
+
+## Команда browse / home
 
 The `browse` (aliased to `home`) opens a package's repository URL or homepage
 in your browser.
 
+Команда `browse` (псевдоним `home`) открывает URL репозитория пакетов или домашнюю страницу в браузере.
+
 ### Options
+### Параметры
 
 * **--homepage (-H):** Open the homepage instead of the repository URL.
 
-## suggests
+* **--homepage (-H):** Открывает домашнюю страницу вместо URL хранилища.
+
+## Команда suggests
 
 Lists all packages suggested by currently installed set of packages. You can
 optionally pass one or multiple package names in the format of `vendor/package`
@@ -1009,4 +1056,4 @@ If set to 1, this env disables the warning about running commands as root/super 
 It also disables automatic clearing of sudo sessions, so you should really only set this
 if you use Composer as super user at all times like in docker containers.
 
-&larr; [Libraries](02-libraries.md)  |  [Schema](04-schema.md) &rarr;
+&larr; [Библиотеки](02-libraries.md)  |  [Schema](04-schema.md) &rarr;
