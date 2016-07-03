@@ -1,4 +1,5 @@
-[Оригинал](https://github.com/composer/composer/blob/master/doc/00-intro.md) [Оглавление](https://github.com/sergey144010/composer-doc-ru)
+[Оригинал](https://github.com/composer/composer/blob/master/doc/00-intro.md)
+[Оглавление](https://github.com/sergey144010/composer-doc-ru)
 
 # Введение
 
