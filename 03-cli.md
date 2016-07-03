@@ -532,7 +532,7 @@ The color coding is as such:
 
 - **зелёный**: Это последняя версия зависимости на сегодняшний день.
 - **жёлтый**: Зависимость имеет новую версию, которая включает в себя обратную совместимость, поэтому обновляйтесь, когда сможете и можете включать её в работу.
-- **красный**: Зависимость имеет новую версию которая semver-compatible и вы должны обновить её.
+- **красный**: Зависимость имеет новую версию которая semver-compatible и Вы должны обновить её.
 
 ### Options
 ### Параметры
@@ -578,12 +578,21 @@ the package offering the suggestions or the suggested packages respectively.
 * **--no-dev:** Excludes suggestions from `require-dev` packages.
 * **--verbose (-v):** Increased verbosity adds suggesting package name and
   reason for suggestion.
+  
+* **--by-package:** Группирует вывод предлагаемых пакетов.
+* **--by-suggestion:** Группирует вывод предлагаемых пакетов.
+* **--no-dev:** Исключает варианты из `require-dev` пакетов.
+* **--verbose (-v):** Повышает детализацию добавляя предлагаемое имя пакета и причину.
 
-## depends
+## Команда depends
 
 The `depends` command tells you which other packages depend on a certain
 package. As with installation `require-dev` relationships are only considered
 for the root package.
+
+Команда `depends` говорит, что другие пакеты зависят от определенного
+пакета. Как с установкой `require-dev` отношения рассматриваются только
+для корневого пакета.
 
 ```sh
 php composer.phar depends doctrine/lexer
@@ -594,8 +603,12 @@ php composer.phar depends doctrine/lexer
 You can optionally specify a version constraint after the package to limit the
 search.
 
+Можно указать ограничение версии после пакета, чтобы сузить поиск.
+
 Add the `--tree` or `-t` flag to show a recursive tree of why the package is
 depended upon, for example:
+
+Добавьте флаги `--tree` или `-t`, чтобы увидеть дерево рекурсии зависимостей пакета, например:
 
 ```sh
 php composer.phar depends psr/log -t
@@ -610,16 +623,24 @@ psr/log 1.0.0 Common interface for logging libraries
 ```
 
 ### Options
+### Параметры
 
 * **--recursive (-r):** Recursively resolves up to the root package.
 * **--tree (-t):** Prints the results as a nested tree, implies -r.
 
-## prohibits
+* **--recursive (-r):** Рекурсия разрешается до корня пакета.
+* **--tree (-t):** Выводит результаты в виде вложенного дерева, подразумевает -r.
+
+## Команда prohibits
 
 The `prohibits` command tells you which packages are blocking a given package
 from being installed. Specify a version constraint to verify whether upgrades
 can be performed in your project, and if not why not. See the following
 example:
+
+Команда `prohibits` говорит о том, какие пакеты блокируют установку данного пакета.
+Укажите ограничение версии для проверки могут ли быть выполнены обновления в вашем проекте и если нет то почему.
+Смотрите следующий пример: 
 
 ```sh
 php composer.phar prohibits symfony/symfony 3.1
@@ -628,6 +649,9 @@ php composer.phar prohibits symfony/symfony 3.1
 
 Note that you can also specify platform requirements, for example to check
 whether you can upgrade your server to PHP 8.0:
+
+Обратите внимание, что можно также указать требования к платформе для проверки
+поддерживает ли Ваш сервер PHP 8.0:
 
 ```sh
 php composer.phar prohibits php:8
@@ -639,22 +663,38 @@ php composer.phar prohibits php:8
 As with `depends` you can request a recursive lookup, which will list all
 packages depending on the packages that cause the conflict.
 
+Как и с `depends` Вы можете запросить рекурсивный поиск, который выведет список всех
+пакетов которые вызывают конфликт.
+
 ### Options
+### Параметры
 
 * **--recursive (-r):** Recursively resolves up to the root package.
 * **--tree (-t):** Prints the results as a nested tree, implies -r.
 
-## validate
+* **--recursive (-r):** Рекурсивно разрешает до корня пакета.
+* **--tree (-t):** Выводит результаты в виде вложенного дерева, подразумевает -r.
+
+## Команда validate
 
 You should always run the `validate` command before you commit your
 `composer.json` file, and before you tag a release. It will check if your
 `composer.json` is valid.
+
+Всегда следует выполнять команду `validate` (проверить) прежде чем фиксировать 
+файл `composer.json`, и до того, как делать релиз. Он будет проверять является ли допустимым Ваш файл
+`composer.json`.
 
 ```sh
 php composer.phar validate
 ```
 
 ### Options
+### Параметры
+
+* **--no-check-all:** Do not emit a warning if requirements in `composer.json` use unbound version constraints.
+* **--no-check-lock:** Do not emit an error if `composer.lock` exists and is not up to date.
+* **--no-check-publish:** Do not emit an error if `composer.json` is unsuitable for publishing as a package on Packagist but is otherwise valid.
 
 * **--no-check-all:** Do not emit a warning if requirements in `composer.json` use unbound version constraints.
 * **--no-check-lock:** Do not emit an error if `composer.lock` exists and is not up to date.
