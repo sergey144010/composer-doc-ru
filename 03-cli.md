@@ -563,10 +563,15 @@ Lists all packages suggested by currently installed set of packages. You can
 optionally pass one or multiple package names in the format of `vendor/package`
 to limit output to suggestions made by those packages only.
 
+Список всех пакетов установленных в настоящее время. Вы можете при необходимости передать имена одного или нескольких пакетов в формате `vendor/package`, что бы ограничить вывод только тех пакетов которые требуются.
+
 Use the `--by-package` or `--by-suggestion` flags to group the output by
 the package offering the suggestions or the suggested packages respectively.
 
+Используйте флаги `--by-package` или `--by-suggestion` для группирования выходных пакетов.
+
 ### Options
+### Параметры
 
 * **--by-package:** Groups output by suggesting package.
 * **--by-suggestion:** Groups output by suggested package.
