@@ -940,12 +940,27 @@ By default the command checks for the packages on packagist.org.
 * **--ignore-platform-reqs:** ignore `php`, `hhvm`, `lib-*` and `ext-*`
   requirements and force the installation even if the local machine does not
   fulfill these.
+  
+* **--repository:** Указывает на пользовательское хранилище для поиска пакета, которое будет использоваться вместо packagist. Может быть либо URL HTTP указывающий на репозиторий `composer`, либо путём к локальному файлу `packages.json`, либо JSON строкой, которая похожа на ключи [репозитория](04-schema.md#repositories).
+* **--stability (-s):** Минимальная стабильность пакета. По умолчанию `stable`.
+* **--prefer-source:** Установка пакетов из `source` если возможно.
+* **--prefer-dist:** Установка пакетов из `dist` если возможно.
+* **--dev:** Установить пакеты, перечисленные в `require-dev`.
+* **--no-install:** Отключает установку поставщиков.
+* **--no-scripts:** Отключает выполнение сценариев, определенных в корневом пакете.
+* **--no-progress:** Удаляет отображения прогресса, который может возиться с некоторыми терминалами или сценариями, которые не обрабатывают символы возврата.
+* **--keep-vcs:** Пропустить удаление VCS метаданных для созданного проекта. Это особенно полезно, если Вы запускаете команду в неинтерактивном режиме.
+* **--ignore-platform-reqs:** игнорировать `php`, `hhvm`, `lib-*` and `ext-*`
+  зависимости и принудительно установить, даже если локальный компьютер не выполнит эти.
 
-## dump-autoload
+## Команда dump-autoload
 
 If you need to update the autoloader because of new classes in a classmap
 package for example, you can use "dump-autoload" to do that without having to
 go through an install or update.
+
+Если Вам нужно обновить автозагрузчик из-за новых классов в classmap,
+Вы можете использовать "dump-autoload" чтобы сделать это без необходимости прохождения через установку или обновление.
 
 Additionally, it can dump an optimized autoloader that converts PSR-0/4 packages
 into classmap ones for performance reasons. In large applications with many
@@ -954,7 +969,10 @@ time. Using classmaps for everything is less convenient in development, but
 using this option you can still use PSR-0/4 for convenience and classmaps for
 performance.
 
+Кроме того это также может выбросить оптимизированный автозагрузчик, который преобразует PSR-0/4 пакеты в classmap из соображений производительности. В больших приложениях с многими классами автозагрузчик может занять значительную часть времени каждого запроса. Использовать classmaps для всего этого менее удобно, в области развития, но с помощью этого параметра можно использовать PSR-0/4 для удобства и classmaps для производительности.
+
 ### Options
+### Параметры
 
 * **--optimize (-o):** Convert PSR-0/4 autoloading to classmap to get a faster
   autoloader. This is recommended especially for production, but can take
@@ -963,23 +981,41 @@ performance.
   Implicitly enables `--optimize`.
 * **--no-dev:** Disables autoload-dev rules.
 
-## clear-cache
+* **--optimize (-o):** Преобразует PSR-0/4 автозагрузчики classmap чтобы получить более быстрый автозагрузчик. Это особенно актуально для режима production, но может занимать немного больше времени при запуске, так что в настоящее время это не делается по умолчанию.
+* **--classmap-authoritative (-a):** Автозагрузка классов только из classmap. Неявно включает `--optimize`.
+* **--no-dev:** Запрещает правила autoload-dev.
+
+## Команда clear-cache
 
 Deletes all content from Composer's cache directories.
 
-## licenses
+Удаляет все содержимое из кэш директорий Composer.
+
+## Команда licenses
 
 Lists the name, version and license of every package installed. Use
 `--format=json` to get machine readable output.
 
+Содержит имя, версию и лицензию каждого пакета. Использовать
+`--format=json` чтобы получить машиночитаемый формат.
+
 ### Options
+### Параметры
 
 * **--no-dev:** Remove dev dependencies from the output
 * **--format:** Format of the output: text or json (default: "text")
 
-## run-script
+* **--no-dev:** Удаляет dev зависимости из выходных данных
+* **--format:** Формат вывода: текст или json (по умолчанию: "text")
+
+## Команда run-script
 
 ### Options
+### Параметры
+
+* **--timeout:** Set the script timeout in seconds, or 0 for no timeout.
+* **--no-dev:** Disable dev mode
+* **--list:** List user defined scripts
 
 * **--timeout:** Set the script timeout in seconds, or 0 for no timeout.
 * **--no-dev:** Disable dev mode
