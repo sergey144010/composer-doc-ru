@@ -696,15 +696,19 @@ php composer.phar validate
 * **--no-check-lock:** Do not emit an error if `composer.lock` exists and is not up to date.
 * **--no-check-publish:** Do not emit an error if `composer.json` is unsuitable for publishing as a package on Packagist but is otherwise valid.
 
-* **--no-check-all:** Do not emit a warning if requirements in `composer.json` use unbound version constraints.
-* **--no-check-lock:** Do not emit an error if `composer.lock` exists and is not up to date.
-* **--no-check-publish:** Do not emit an error if `composer.json` is unsuitable for publishing as a package on Packagist but is otherwise valid.
+* **--no-check-all:** Не выбрасывать предупреждение если зависимости в `composer.json` не связаны.
+* **--no-check-lock:** Не выбрасывать ошибку если `composer.lock` существует и не является актуальным.
+* **--no-check-publish:** Не выбрасывать ошибку если `composer.json` непригоден для публикации как пакет на Packagist, но действителен.
 
-## status
+## Команда status
 
 If you often need to modify the code of your dependencies and they are
 installed from source, the `status` command allows you to check if you have
 local changes in any of them.
+
+Если часто требуется изменять код Ваших зависимостей и они
+устанавливались из исходников, команда `status` позволяет проверить, есть ли у Вас
+локальные изменения в любой из них.
 
 ```sh
 php composer.phar status
@@ -712,6 +716,8 @@ php composer.phar status
 
 With the `--verbose` option you get some more information about what was
 changed:
+
+С параметром `--verbose` Вы получите более подробную информацию о том, что изменено:
 
 ```sh
 php composer.phar status -v
@@ -721,16 +727,21 @@ vendor/seld/jsonlint:
     M README.mdown
 ```
 
-## self-update
+## Команда self-update
 
 To update Composer itself to the latest version, just run the `self-update`
 command. It will replace your `composer.phar` with the latest version.
+
+Чтобы обновить Composer до последней версии, просто запустите команду `self-update`.
+Она заменит Ваш `composer.phar` до последней версии.
 
 ```sh
 php composer.phar self-update
 ```
 
 If you would like to instead update to a specific release simply specify it:
+
+Если Вы хотите вместо этого обновления конкретную версию просто укажите её:
 
 ```sh
 php composer.phar self-update 1.0.0-alpha7
@@ -739,28 +750,39 @@ php composer.phar self-update 1.0.0-alpha7
 If you have installed Composer for your entire system (see [global installation](00-intro.md#globally)),
 you may have to run the command with `root` privileges
 
+Если Вы установили Composer для всей Вашей системы (см. [глобальная установка](00-intro.md#globally)), то может потребоваться выполнить команду с правами `root`
+
 ```sh
 sudo -H composer self-update
 ```
 
 ### Options
+### Параметры
 
 * **--rollback (-r):** Rollback to the last version you had installed.
 * **--clean-backups:** Delete old backups during an update. This makes the
   current version of Composer the only backup available after the update.
+  
+* **--rollback (-r):** Откат последней версии, которую вы установили.
+* **--clean-backups:** Удаляет старые бекапы во время обновления. После обновления становится доступна только текущая версия Composer.
 
-## config
+## Команда config
 
 The `config` command allows you to edit composer config settings and repositories
 in either the local `composer.json` file or the global `config.json` file.
 
+Команда `config` позволяет редактировать параметры конфигурации Composer и репозиториев в локальных `composer.json` файлах или глобальном `config.json` файле.
+
 Additionally it lets you edit most properties in the local `composer.json`.
+
+Кроме того она позволяет редактировать большинство свойств в локальном `composer.json`.
 
 ```sh
 php composer.phar config --list
 ```
 
 ### Usage
+### Использование
 
 `config [options] [setting-key] [setting-value1] ... [setting-valueN]`
 
@@ -768,14 +790,22 @@ php composer.phar config --list
 configuration value.  For settings that can take an array of values (like
 `github-protocols`), more than one setting-value arguments are allowed.
 
+`setting-key` это название параметра конфигурации, а `setting-value1` это
+значение параметра конфигурации. Для параметров, которые могут принимать массив значений (как `github-protocols`) разрешено более чем одно значение параметра.
+
 You can also edit the values of the following properties:
+
+Вы также можете редактировать значения следующих свойств:
 
 `description`, `homepage`, `keywords`, `license`, `minimum-stability`,
 `name`, `prefer-stable`, `type` and `version`.
 
 See the [Config](06-config.md) chapter for valid configuration options.
 
+Смотрите раздел [Конфиг](06-config.md) допустимые параметры конфигурации.
+
 ### Options
+### Параметры
 
 * **--global (-g):** Operate on the global config file located at
   `$COMPOSER_HOME/config.json` by default.  Without this option, this command
@@ -790,11 +820,24 @@ See the [Config](06-config.md) chapter for valid configuration options.
   that this cannot be used in conjunction with the `--global` option.
 * **--absolute:** Returns absolute paths when fetching *-dir config values
   instead of relative.
+  
+* **--global (-g):** Глобальный конфигурационный файл по умолчанию расположен в `$COMPOSER_HOME/config.json`.
+  Без этого параметра команда config влияет на местный composer.json файл или файл указанный в `--file`.
+* **--editor (-e):** Откроет локальный composer.json файл при помощи текстового редактора определённого в переменной окружения `EDITOR`.
+  С параметром `--global` открывает глобальный конфигурационный файл.
+* **--unset:** Удалит элемент конфигурации названный через `setting-key`.
+* **--list (-l):** Покажет список текущих переменных конфигурации. С параметром `--global` покажет только список глобальной конфигурации.
+* **--file="..." (-f):** Работать с определённым файлом вместо composer.json.
+  Обратите внимание, что это не может использоваться в сочетании с `--global` вариантом.
+* **--absolute:** Возвращает абсолютные пути при выборке *-dir конфигурационных значений вместо относительных.
 
 ### Modifying Repositories
+### Изменения репозиториев
 
 In addition to modifying the config section, the `config` command also supports making
 changes to the repositories section by using it the following way:
+
+В дополнение к изменению разделов конфигурации, команда `config` также поддерживает внесение изменений в разделы репозиториев, используется следующим образом:
 
 ```sh
 php composer.phar config repositories.foo vcs https://github.com/foo/bar
@@ -802,14 +845,19 @@ php composer.phar config repositories.foo vcs https://github.com/foo/bar
 
 If your repository requires more configuration options, you can instead pass its JSON representation :
 
+Если Вашему репозиторию необходимы дополнительные параметры конфигурации, можно передать их в JSON формате:
+
 ```sh
 php composer.phar config repositories.foo '{"type": "vcs", "url": "http://svn.example.org/my-project/", "trunk-path": "master"}'
 ```
 
 ### Modifying Extra Values
+### Изменения дополнительных значений
 
 In addition to modifying the config section, the `config` command also supports making
 changes to the extra section by using it the following way:
+
+В дополнение к изменению разделов конфигурации, команда `config` также поддерживает внесение изменений в дополнительный раздел, используется следующим образом:
 
 ```sh
 php composer.phar config extra.foo.bar value
@@ -818,24 +866,42 @@ php composer.phar config extra.foo.bar value
 The dots indicate array nesting, a max depth of 3 levels is allowed though. The above
 would set `"extra": { "foo": { "bar": "value" } }`.
 
-## create-project
+Точки обозначают массив вложенности, допускается максимальная глубина на 3 уровня. Выше
+будет `"extra": { "foo": { "bar": "value" } }`.
+
+## Команда create-project
 
 You can use Composer to create new projects from an existing package. This is
 the equivalent of doing a git clone/svn checkout followed by a "composer install"
 of the vendors.
 
+Composer можно использовать для создания новых проектов из существующего пакета. Это
+эквивалентно git clone/svn далее "composer install".
+
 There are several applications for this:
+
+Существует несколько приложений для этого:
 
 1. You can deploy application packages.
 2. You can check out any package and start developing on patches for example.
 3. Projects with multiple developers can use this feature to bootstrap the
    initial application for development.
+   
+1. Можно развернуть пакеты приложений.
+2. Можете проверить любой пакет и начать разработку патчей к примеру.
+3. Проекты с несколькими разработчиками могут использовать эту функцию для загрузки начального приложения для дальнейшей разрабоки.
 
 To create a new project using Composer you can use the "create-project" command.
 Pass it a package name, and the directory to create the project in. You can also
 provide a version as third argument, otherwise the latest version is used.
 
+Для создания нового проекта с использованием Composer можно использовать команду "create-project".
+Передайте имя пакета и каталог для создания проекта. Вы также можете
+предоставить версию в качестве третьего аргумента, в противном случае используется последняя версия.
+
 If the directory does not currently exist, it will be created during installation.
+
+Если каталог не существует в настоящее время, он будет создан во время установки.
 
 ```sh
 php composer.phar create-project doctrine/orm path 2.2.*
@@ -844,9 +910,15 @@ php composer.phar create-project doctrine/orm path 2.2.*
 It is also possible to run the command without params in a directory with an
 existing `composer.json` file to bootstrap a project.
 
+Также можно запустить команду без параметров в каталоге с
+существующим файлом `composer.json` для загрузки проекта.
+
 By default the command checks for the packages on packagist.org.
 
+По умолчанию команда проверяет пакеты на packagist.org.
+
 ### Options
+### Параметры
 
 * **--repository:** Provide a custom repository to search for the package,
   which will be used instead of packagist. Can be either an HTTP URL pointing
