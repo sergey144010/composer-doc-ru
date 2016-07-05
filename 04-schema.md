@@ -1,11 +1,13 @@
 [Оригинал](https://github.com/composer/composer/blob/master/doc/04-schema.md)
 [Оглавление](https://github.com/sergey144010/composer-doc-ru/blob/master/README.md#Оглавление)
 
-# The composer.json Schema
+# Схема composer.json
 
 This chapter will explain all of the fields available in `composer.json`.
 
-## JSON schema
+Эта глава объяснит все поля доступные в `composer.json`.
+
+## JSON схема
 
 We have a [JSON schema](http://json-schema.org) that documents the format and
 can also be used to validate your `composer.json`. In fact, it is used by the
