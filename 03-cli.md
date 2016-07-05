@@ -1017,75 +1017,111 @@ Lists the name, version and license of every package installed. Use
 * **--no-dev:** Disable dev mode
 * **--list:** List user defined scripts
 
-* **--timeout:** Set the script timeout in seconds, or 0 for no timeout.
-* **--no-dev:** Disable dev mode
-* **--list:** List user defined scripts
+* **--timeout:** Установить таймаут сценария в секундах, или 0 - нет таймаута.
+* **--no-dev:** Запретить dev режим
+* **--list:** Список пользовательских скриптов
 
 To run [scripts](articles/scripts.md) manually you can use this command,
 just give it the script name and optionally any required arguments.
 
-## exec
+Для запуска [сценариев](articles/scripts.md) вручную, Вы можете использовать эту команду,
+просто передайте имя сценария и при необходимости любые необходимые аргументы.
+
+## Команда exec
 
 Executes a vendored binary/script. You can execute any command and this will
 ensure that the Composer bin-dir is pushed on your PATH before the command
 runs.
 
+!!!
+Выполняет бинарник/скрипт поставщика. Вы можете выполнить любую команду, и это будет гарантировать, что композитор Бен dir помещается на вашем пути, прежде чем выполняется команда.
+!!!
+
 ### Options
+### Параметры
 
 * **--list:** List the available composer binaries
 
-## diagnose
+* **--list:** Список доступных Composer двоичных файлов
+
+## Команда diagnose
 
 If you think you found a bug, or something is behaving strangely, you might
 want to run the `diagnose` command to perform automated checks for many common
 problems.
 
+Если Вы думаете, что нашли ошибку, или что-то ведет себя странно, Вы можете 
+запустить команду `diagnose` для выполнения автоматизированных проверок на многие распространенные проблемы.
+
 ```sh
 php composer.phar diagnose
 ```
 
-## archive
+## Команда archive
 
 This command is used to generate a zip/tar archive for a given package in a
 given version. It can also be used to archive your entire project without
 excluded/ignored files.
+
+Эта команда используется для создания zip/tar архивов для данного пакета в
+данной версии. Он также может использоваться для архивации всего проекта без
+игнорируемых/исключённых файлов.
 
 ```sh
 php composer.phar archive vendor/package 2.0.21 --format=zip
 ```
 
 ### Options
+### Параметры
 
 * **--format (-f):** Format of the resulting archive: tar or zip (default:
   "tar")
 * **--dir:** Write the archive to this directory (default: ".")
 
-## help
+
+* **--format (-f):** Формат конечного архива: tar или zip (по умолчанию: "tar")
+* **--dir:** Запись архива в каталог (по умолчанию: ".")
+
+## Команда help
 
 To get more information about a certain command, just use `help`.
+
+Чтобы получить дополнительные сведения об определенной команде, просто используйте `help`.
 
 ```sh
 php composer.phar help install
 ```
 
-## Command-line completion
+## Завершение командной строки (Command-line completion)
 
 Command-line completion can be enabled by following instructions
 [on this page](https://github.com/bamarni/symfony-console-autocomplete).
 
+Завершение командной строки может быть включено, следуя инструкциям
+[на этой странице](https://github.com/bamarni/symfony-console-autocomplete).
+
 ## Environment variables
+## Переменные окружения
 
 You can set a number of environment variables that override certain settings.
 Whenever possible it is recommended to specify these settings in the `config`
 section of `composer.json` instead. It is worth noting that the env vars will
 always take precedence over the values specified in `composer.json`.
 
+Можно установить несколько переменных окружения, которые переопределяют определенные параметры.
+По возможности рекомендуется указывать эти параметры в файле `composer.json`
+раздел `config`. Стоит отметить, что переменные окружения будут
+всегда иметь приоритет над значениями, указанными в `composer.json`.
+
 ### COMPOSER
 
 By setting the `COMPOSER` env variable it is possible to set the filename of
 `composer.json` to something else.
 
+По умолчанию переменная окружения `COMPOSER` разрешает установить вместо имени файла `composer.json` что-нибудь другое.
+
 For example:
+Например:
 
 ```sh
 COMPOSER=composer-other.json php composer.phar install
@@ -1093,15 +1129,22 @@ COMPOSER=composer-other.json php composer.phar install
 
 The generated lock file will use the same name: `composer-other.lock` in this example.
 
+Созданный файл блокировки будет использовать тоже имя: `composer-other.lock` в этом примере.
+
 ### COMPOSER_ROOT_VERSION
 
 By setting this var you can specify the version of the root package, if it can
 not be guessed from VCS info and is not present in `composer.json`.
 
+Установив этот переменную можно указать версию корня пакета, если VCS информация не верна и не присутствует в `composer.json`.
+
 ### COMPOSER_VENDOR_DIR
 
 By setting this var you can make Composer install the dependencies into a
 directory other than `vendor`.
+
+Установив эту переменную, Composer будет устанавливать зависимости в
+каталог, отличный от `vendor`.
 
 ### COMPOSER_BIN_DIR
 
