@@ -1,3 +1,6 @@
+[Оригинал](https://github.com/composer/composer/blob/master/doc/04-schema.md)
+[Оглавление](https://github.com/sergey144010/composer-doc-ru/blob/master/README.md#Оглавление)
+
 # The composer.json Schema
 
 This chapter will explain all of the fields available in `composer.json`.

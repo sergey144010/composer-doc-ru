@@ -1,5 +1,5 @@
 [Оригинал](https://github.com/composer/composer/blob/master/doc/01-basic-usage.md)
-[Оглавление](https://github.com/sergey144010/composer-doc-ru)
+[Оглавление](https://github.com/sergey144010/composer-doc-ru/blob/master/README.md#Оглавление)
 
 # Базовое использование
 
