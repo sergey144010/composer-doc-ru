@@ -1,5 +1,5 @@
 [Оригинал](https://github.com/composer/composer/blob/master/doc/03-cli.md)
-[Оглавление](https://github.com/sergey144010/composer-doc-ru)
+[Оглавление](https://github.com/sergey144010/composer-doc-ru/blob/master/README.md#Оглавление)
 
 # Command-line interface / Commands
 # Интерфейс командной строки / Команды
@@ -19,7 +19,7 @@ can give you more information.
 даст Вам более подробную информацию по команде.
 
 ## Global Options
-## Глобальные параметры
+## Глобальные общие параметры
 
 The following options are available with every command:
 Следующие параметры доступны с каждой командой:
@@ -1151,16 +1151,22 @@ directory other than `vendor`.
 By setting this option you can change the `bin` ([Vendor Binaries](articles/vendor-binaries.md))
 directory to something other than `vendor/bin`.
 
-### http_proxy or HTTP_PROXY
+Установив этот параметр можно изменить каталог `bin` ([Vendor Binaries](articles/vendor-binaries.md)) на что-то другое отличное от `vendor/bin`
+
+### http_proxy или HTTP_PROXY
 
 If you are using Composer from behind an HTTP proxy, you can use the standard
 `http_proxy` or `HTTP_PROXY` env vars. Simply set it to the URL of your proxy.
 Many operating systems already set this variable for you.
 
+Если Вы используете Composer за HTTP прокси, Вы можете использовать стандартные переменные окружения `http_proxy` или `HTTP_PROXY`. Просто установите их на URL адрес вашего прокси-сервера. Многие операционные системы уже установили эту переменную для вас.
+
 Using `http_proxy` (lowercased) or even defining both might be preferable since
 some tools like git or curl will only use the lower-cased `http_proxy` version.
 Alternatively you can also define the git proxy using
 `git config --global http.proxy <proxy url>`.
+
+Использовать `http_proxy` (строчные) или даже оба параметра может быть предпочтительно после некоторых инструментов таких как git или curl, он будет использовать только в нижнем регистре `http_proxy` параметр. В качестве альтернативы можно также определить прокси для git с помощью `git config --global http.proxy <proxy url>`.
 
 ### no_proxy
 
@@ -1168,9 +1174,16 @@ If you are behind a proxy and would like to disable it for certain domains, you
 can use the `no_proxy` env var. Simply set it to a comma separated list of
 domains the proxy should *not* be used for.
 
+Если Вы находитесь за прокси сервером и хотели бы отключить его для некоторых доменов, Вы
+можете использовать переменную окружения `no_proxy`. Просто установите ей список доменов разделенных запятыми, *не* использовать прокси для.
+
 The env var accepts domains, IP addresses, and IP address blocks in CIDR
 notation. You can restrict the filter to a particular port (e.g. `:80`). You
 can also set it to `*` to ignore the proxy for all HTTP requests.
+
+Переменная окружения принимает домены, IP адреса и IP адреса блоков в CIDR
+нотации. Вы можете ограничить фильтр к конкретному порту (например `:80`). Вы 
+также можете установить `*` - игнорировать прокси для всех HTTP-запросов.
 
 ### HTTP_PROXY_REQUEST_FULLURI
 
@@ -1178,11 +1191,19 @@ If you use a proxy but it does not support the request_fulluri flag, then you
 should set this env var to `false` or `0` to prevent Composer from setting the
 request_fulluri option.
 
+Если Вы используете прокси, а он не поддерживает флаг request_fulluri, то Вам
+следует установить эту переменную окружения в `false` или `0` для предотвращения установки Composer из настроек
+request_fulluri опции.
+
 ### HTTPS_PROXY_REQUEST_FULLURI
 
 If you use a proxy but it does not support the request_fulluri flag for HTTPS
 requests, then you should set this env var to `false` or `0` to prevent Composer
 from setting the request_fulluri option.
+
+Если Вы используете прокси, а он не поддерживает request_fulluri флаг для HTTPS
+запросов, то Вы должны установить эту переменную окружения в `false` или `0` для предотвращения Composer
+от параметра request_fulluri.
 
 ### COMPOSER_HOME
 
@@ -1190,11 +1211,20 @@ The `COMPOSER_HOME` var allows you to change the Composer home directory. This
 is a hidden, global (per-user on the machine) directory that is shared between
 all projects.
 
+Переменная `COMPOSER_HOME` позволяет изменить домашний каталог Composer. Это
+скрытый глобальный каталог (для пользователя на компьютере), который делится между
+всеми проектами.
+
 By default it points to `C:\Users\<user>\AppData\Roaming\Composer` on Windows
 and `/Users/<user>/.composer` on OSX. On *nix systems that follow the [XDG Base
 Directory Specifications](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html),
 it points to `$XDG_CONFIG_HOME/composer`. On other *nix systems, it points to
 `/home/<user>/.composer`.
+
+По умолчанию это `C:\Users\<user>\AppData\Roaming\Composer` для Windows,
+для OSX это `/Users/<user>/.composer`. На *nix системах которые следуют спецификации
+[XDG Base Directory Specifications](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+это `$XDG_CONFIG_HOME/composer`. На других *nix система это `/home/<user>/.composer`.
 
 #### COMPOSER_HOME/config.json
 
@@ -1202,29 +1232,47 @@ You may put a `config.json` file into the location which `COMPOSER_HOME` points
 to. Composer will merge this configuration with your project's `composer.json`
 when you run the `install` and `update` commands.
 
+Вы можете положить файл `config.json` в расположение `COMPOSER_HOME`. Composer объединит эту конфигурацию с конфигурацией вашего проекта `composer.json` при запуске команд `install` и `update`.
+
 This file allows you to set [repositories](05-repositories.md) and
 [configuration](06-config.md) for the user's projects.
 
+Этот файл позволяет установить [репозитории](05-repositories.md) и
+[конфигурацию](06-config.md) для проектов пользователя.
+
 In case global configuration matches _local_ configuration, the _local_
 configuration in the project's `composer.json` always wins.
+
+В случае глобальной конфигурации соответствующей конфигурации _local_, _local_
+конфигурация проекта `composer.json` всегда выигрывает.
 
 ### COMPOSER_CACHE_DIR
 
 The `COMPOSER_CACHE_DIR` var allows you to change the Composer cache directory,
 which is also configurable via the [`cache-dir`](06-config.md#cache-dir) option.
 
+Переменная `COMPOSER_CACHE_DIR` позволяет изменять каталог кэша Composer,
+который также настраивается через параметр ['cache-dir'](06-config.md#cache-dir).
+
 By default it points to $COMPOSER_HOME/cache on \*nix and OSX, and
 `C:\Users\<user>\AppData\Local\Composer` (or `%LOCALAPPDATA%/Composer`) on Windows.
+
+По умолчанию, он указывает на $COMPOSER_HOME/cache на \*nix и OSX, и на
+`C:\Users\<user>\AppData\Local\Composer` (или `%LOCALAPPDATA%/Composer`) в Windows.
 
 ### COMPOSER_PROCESS_TIMEOUT
 
 This env var controls the time Composer waits for commands (such as git
 commands) to finish executing. The default value is 300 seconds (5 minutes).
 
+Эта переменная окружения контролирует время ожидания команд (таких как команды git) для завершения выполнения. Значение по умолчанию составляет 300 секунд (5 минут).
+
 ### COMPOSER_CAFILE
 
 By setting this environmental value, you can set a path to a certificate bundle
 file to be used during SSL/TLS peer verification.
+
+Установив это значение переменной, можно задать путь к комплекту файлов сертификатов, которые будут использоваться при одноранговой проверке SSL/TLS.
 
 ### COMPOSER_AUTH
 
@@ -1233,18 +1281,30 @@ The contents of the variable should be a JSON formatted object containing http-b
 github-oauth, bitbucket-oauth, ... objects as needed, and following the
 [spec from the config](06-config.md#gitlab-oauth).
 
+Переменная `COMPOSER_AUTH` позволяет настроить проверку подлинности как переменную окружения.
+Содержимое переменной должно быть отформатированный объект JSON содержащий http-basic,
+github-oauth, bitbucket-oauth ... объекты, и следуют
+[спецификации из конфигурации](06-config.md#gitlab-oauth).
+
 ### COMPOSER_DISCARD_CHANGES
 
 This env var controls the [`discard-changes`](06-config.md#discard-changes) config option.
+
+Эта переменная окружения управляет параметром конфигурации [`discard-changes`](06-config.md#discard-changes).
 
 ### COMPOSER_NO_INTERACTION
 
 If set to 1, this env var will make Composer behave as if you passed the
 `--no-interaction` flag to every command. This can be set on build boxes/CI.
 
+Если установлено в 1, эта переменная окружения сделает поведение Composer как если бы передавался флаг
+`--no-interaction` для каждой команды. Это может быть настроено при сборке boxes/CI.
+
 ### COMPOSER_DISABLE_XDEBUG_WARN
 
 If set to 1, this env disables the warning about having xdebug enabled.
+
+Если установлено в 1, эта переменная отключает предупреждение о том, что включен xdebug.
 
 ### COMPOSER_ALLOW_SUPERUSER
 
@@ -1252,4 +1312,8 @@ If set to 1, this env disables the warning about running commands as root/super 
 It also disables automatic clearing of sudo sessions, so you should really only set this
 if you use Composer as super user at all times like in docker containers.
 
-&larr; [Библиотеки](02-libraries.md)  |  [Schema](04-schema.md) &rarr;
+Если установлено в 1, эта переменная отключает предупреждение о запуске команды как root/super пользователь.
+Она также отключает автоматическую очистку сессий sudo, поэтому Вы должны задавать эту переменную только тогда, когда
+Вы действительно используете Composer как супер пользователь всё время как в docker контейнерах.
+
+&larr; [Библиотеки](02-libraries.md)  |  [Схема](04-schema.md) &rarr;
