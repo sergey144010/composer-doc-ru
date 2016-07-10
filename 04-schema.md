@@ -13,52 +13,86 @@ We have a [JSON schema](http://json-schema.org) that documents the format and
 can also be used to validate your `composer.json`. In fact, it is used by the
 `validate` command. You can find it at: https://getcomposer.org/schema.json
 
+У нас есть [JSON схема](http://json-schema.org) которая может быть использована
+для проверки Вашего `composer.json`. По факту она используется для команды `validate`.
+Можете найти это в : https://getcomposer.org/schema.json
+
 ## Root Package
+## Корневой пакет
 
 The root package is the package defined by the `composer.json` at the root of
 your project. It is the main `composer.json` that defines your project
 requirements.
+
+Корневой пакет это пакет определённый через `composer.json` в корне Вашего проекта.
+Это главный `composer.json` который определяет зависимости Вашего проекта.
 
 Certain fields only apply when in the root package context. One example of
 this is the `config` field. Only the root package can define configuration.
 The config of dependencies is ignored. This makes the `config` field
 `root-only`.
 
+Некоторые поля применяются только в рамках корневого пакета. Одним из примеров
+это поле `config`. Только корневой пакет может определять конфигурацию.
+Настройка зависимостей игнорируется. Это делает `config` поле `root-only`.
+
 > **Note:** A package can be the root package or not, depending on the context.
 > For example, if your project depends on the `monolog` library, your project
 > is the root package. However, if you clone `monolog` from GitHub in order to
 > fix a bug in it, then `monolog` is the root package.
 
+> **Примечание:** Пакет может быть корневым пакетом или не быть, в зависимости от контекста.
+> Например если Ваш проект зависит от библиотеки `monolog`, Ваш проект является корневым пакетом.
+> Однако если Вы клонируете `monolog` из GitHub для того, чтобы исправить ошибку в нём, то тогда `monolog` является корневым пакетом.
+
 ## Properties
+## Свойства
 
 ### name
 
 The name of the package. It consists of vendor name and project name,
 separated by `/`.
 
+Имя пакета. Оно состоит из имени поставщика и имени проекта разделенных `/`.
+
 Examples:
+Примеры:
 
 * monolog/monolog
 * igorw/event-source
 
 Required for published packages (libraries).
 
+Требуется для публикации пакетов (библиотек).
+
 ### description
 
 A short description of the package. Usually this is just one line long.
 
+Краткое описание пакета. Обычно длиной только в одну линию.
+
 Required for published packages (libraries).
+
+Требуется для публикации пакетов (библиотек).
 
 ### version
 
 The version of the package. In most cases this is not required and should
 be omitted (see below).
 
+Версия пакета. В большинстве случаев это не является обязательным и должен
+исключено (см. ниже).
+
 This must follow the format of `X.Y.Z` or `vX.Y.Z` with an optional suffix
 of `-dev`, `-patch` (`-p`), `-alpha` (`-a`), `-beta` (`-b`) or `-RC`.
 The patch, alpha, beta and RC suffixes can also be followed by a number.
 
+Должна соответствовать формату `X.Y.Z` или `vX.Y.Z` с необязательным суффиксом
+`-dev`, `-patch` (`-p`), `-alpha` (`-a`), `-beta` (`-b`) или `-RC`.
+Суффиксы patch, alpha, beta и RC могут также следовать за номером.
+
 Examples:
+Примеры:
 
 - 1.0.0
 - 1.0.2
@@ -74,13 +108,21 @@ Optional if the package repository can infer the version from somewhere, such
 as the VCS tag name in the VCS repository. In that case it is also recommended
 to omit it.
 
+Необязательное свойство. Если репозиторий пакетов может вывести версию от куда-то, так
+как имя тега VCS в VCS репозитории. В этом случае рекомендуется опустить данное свойство.
+
 > **Note:** Packagist uses VCS repositories, so the statement above is very
 > much true for Packagist as well. Specifying the version yourself will
 > most likely end up creating problems at some point due to human error.
 
+> **Примечание:** Packagist использует репозитории VCS, поэтому описанное выше очень верно также и для Packagist.
+> Указание версии будет скорее всего в конечном итоге создавать проблемы в какой-то момент из-за человеческой ошибки.
+
 ### type
 
 The type of the package. It defaults to `library`.
+
+Тип пакета. По умолчанию `library`.
 
 Package types are used for custom installation logic. If you have a package
 that needs some special logic, you can define a custom type. This could be a
