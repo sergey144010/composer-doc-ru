@@ -32,7 +32,7 @@ this is the `config` field. Only the root package can define configuration.
 The config of dependencies is ignored. This makes the `config` field
 `root-only`.
 
-Некоторые поля применяются только в рамках корневого пакета. Одним из примеров
+Некоторые поля применяются только в рамках корневого пакета. Один из примеров
 это поле `config`. Только корневой пакет может определять конфигурацию.
 Настройка зависимостей игнорируется. Это делает `config` поле `root-only`.
 
@@ -80,16 +80,16 @@ Required for published packages (libraries).
 The version of the package. In most cases this is not required and should
 be omitted (see below).
 
-Версия пакета. В большинстве случаев это не является обязательным и должен
+Версия пакета. В большинстве случаев это поле не является обязательным и должно быть
 исключено (см. ниже).
 
 This must follow the format of `X.Y.Z` or `vX.Y.Z` with an optional suffix
 of `-dev`, `-patch` (`-p`), `-alpha` (`-a`), `-beta` (`-b`) or `-RC`.
 The patch, alpha, beta and RC suffixes can also be followed by a number.
 
-Должна соответствовать формату `X.Y.Z` или `vX.Y.Z` с необязательным суффиксом
+Должно соответствовать формату `X.Y.Z` или `vX.Y.Z` с необязательным суффиксом
 `-dev`, `-patch` (`-p`), `-alpha` (`-a`), `-beta` (`-b`) или `-RC`.
-Суффиксы patch, alpha, beta и RC могут также следовать за номером.
+Суффиксы patch, alpha, beta и RC также могут следовать за номером.
 
 Examples:
 Примеры:
@@ -130,7 +130,15 @@ that needs some special logic, you can define a custom type. This could be a
 all be specific to certain projects, and they will need to provide an
 installer capable of installing packages of that type.
 
+Тип пакетов используется для пользовательской логики установки. Если у Вас есть пакет для которого
+нужна какая-то особая логика, то Вы можете определить пользовательский тип. Это может быть
+`symfony-bundle`, `wordpress-plugin` или `typo3-module`.
+Эти все типы для конкретных проектов и они должны предоставлять
+установщику возможность устанавливать пакеты этого типа.
+
 Out of the box, Composer supports four types:
+
+Из коробки Composer поддерживает четыре типа:
 
 - **library:** This is the default. It will simply copy the files to `vendor`.
 - **project:** This denotes a project rather than a library. For example
@@ -146,16 +154,31 @@ Out of the box, Composer supports four types:
 - **composer-plugin:** A package of type `composer-plugin` may provide an
   installer for other packages that have a custom type. Read more in the
   [dedicated article](articles/custom-installers.md).
+  
+- **library:** Это значение по умолчанию. Это просто скопирует файлы в `vendor`.
+- **project:** Это обозначение проектов вместо библиотек. Например шелл приложений таких как
+  [Symfony standard edition](https://github.com/symfony/symfony-standard), CMS таких как
+  [SilverStripe installer](https://github.com/silverstripe/silverstripe-installer) или
+  полноценных приложений распространяемых как пакеты. Это может например использоваться в IDE предоставляя
+  список проектов для инициализации при создании новой рабочей области.
+- **metapackage:** Пустой пакет содержащий требования и выззывающий их установку, но не содержащий файлов, не будет писать что-либо в файловой системе. Таким образом он не зависит от dist или устанавливаемых исходных ключей.
+- **composer-plugin:** Пакет типа `composer-plugin` может предоставить установщик для других пакетов, которые имеют пользовательский тип. Подробнее читайте в [dedicated article](articles/custom-installers.md).
 
 Only use a custom type if you need custom logic during installation. It is
 recommended to omit this field and have it just default to `library`.
+
+Используйте пользовательский тип, только если требуется пользовательская логика во время установки.
+Рекомендуется пропустить это поле или просто использовать по умолчанию `library`.
 
 ### keywords
 
 An array of keywords that the package is related to. These can be used for
 searching and filtering.
 
+Массив ключевых слов, которые касаются пакета. Они могут быть использованы для поиска и фильтрации.
+
 Examples:
+Примеры:
 
 - logging
 - events
@@ -165,19 +188,31 @@ Examples:
 
 Optional.
 
+Необязательное поле.
+
 ### homepage
 
 An URL to the website of the project.
 
+URL-адрес веб-сайта проекта.
+
 Optional.
+
+Необязательное поле.
 
 ### time
 
 Release date of the version.
 
+Дата версии релиза.
+
 Must be in `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` format.
 
+Должно быть в формате `YYYY-MM-DD` или `YYYY-MM-DD HH:MM:SS`
+
 Optional.
+
+Необязательное поле.
 
 ### license
 
