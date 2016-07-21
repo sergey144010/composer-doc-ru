@@ -260,7 +260,11 @@ An Example:
 For a package, when there is a choice between licenses ("disjunctive license"),
 multiple can be specified as array.
 
+Для пакета у которого есть выбор между лицензиями ("disjunctive license"),
+может быть указано несколько как массив.
+
 An Example for disjunctive licenses:
+Пример disjunctive licenses:
 
 ```json
 {
@@ -273,6 +277,8 @@ An Example for disjunctive licenses:
 
 Alternatively they can be separated with "or" and enclosed in parenthesis;
 
+В качестве альтернативы они могут быть разделены через "or" и должны быть заключены в скобки;
+
 ```json
 {
     "license": "(LGPL-2.1 or GPL-3.0+)"
@@ -282,18 +288,32 @@ Alternatively they can be separated with "or" and enclosed in parenthesis;
 Similarly when multiple licenses need to be applied ("conjunctive license"),
 they should be separated with "and" and enclosed in parenthesis.
 
+Аналогичным образом, когда имеется несколько лицензий необходимо применять ("conjunctive license"),
+они должны быть разделены через "and" и должны быть заключены в скобки.
+
 ### authors
 
 The authors of the package. This is an array of objects.
 
+Авторы пакета. Это массив объектов.
+
 Each author object can have following properties:
+
+Каждый объект автора может иметь следующие свойства:
 
 * **name:** The author's name. Usually their real name.
 * **email:** The author's email address.
 * **homepage:** An URL to the author's website.
 * **role:** The author's role in the project (e.g. developer or translator)
 
+* **name:** Имя автора. Обычно реальное имя авторов.
+* **email:** Адрес электронной почты автора.
+* **homepage:** URL-адрес веб-сайта автора.
+* **role:** Роль автора в проекте (например, разработчик или переводчик)
+
 An example:
+
+Пример:
 
 ```json
 {
@@ -315,6 +335,8 @@ An example:
 ```
 
 Optional, but highly recommended.
+
+Необязательно, но настоятельно рекомендуется.
 
 ### support
 
