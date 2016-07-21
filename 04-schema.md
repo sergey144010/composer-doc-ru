@@ -218,7 +218,11 @@ Optional.
 
 The license of the package. This can be either a string or an array of strings.
 
+Лицензия пакета. Это может быть строка или массив строк.
+
 The recommended notation for the most common licenses is (alphabetical):
+
+Рекомендуются нотации для наиболее распространенных лицензий (по алфавиту):
 
 - Apache-2.0
 - BSD-2-Clause
@@ -237,9 +241,15 @@ The recommended notation for the most common licenses is (alphabetical):
 Optional, but it is highly recommended to supply this. More identifiers are
 listed at the [SPDX Open Source License Registry](https://www.spdx.org/licenses/).
 
+Необязательно, но настоятельно рекомендуется указать это поле. Дополнительные идентификаторы
+перечислены в [SPDX Open Source License Registry](https://www.spdx.org/licenses/).
+
 For closed-source software, you may use `"proprietary"` as the license identifier.
 
+Для программного обеспечения с закрытым исходным кодом можете использовать `"proprietary"` как идентификатор лицензии.
+
 An Example:
+Пример:
 
 ```json
 {
