@@ -404,7 +404,7 @@ Example:
 
 All links are optional fields.
 
-Все ссылки являются обязательными полями.
+Все ссылки являются не обязательными полями.
 
 `require` and `require-dev` additionally support stability flags ([root-only](04-schema.md#root-package)).
 These allow you to further restrict or expand the stability of a package beyond
@@ -412,7 +412,14 @@ the scope of the [minimum-stability](#minimum-stability) setting. You can apply
 them to a constraint, or just apply them to an empty constraint if you want to
 allow unstable packages of a dependency for example.
 
+`require` и `require-dev` кроме того, поддерживают флаги стабильности, но только для ([корневого пакета](04-schema.md#root-package)).
+Это позволит Вам в дальнейшем ограничивать или расширять стабильность пакета за пределами
+области [minimum-stability](#minimum-stability). Вы можете применить
+их ограничения, или просто применить пустые ограничения, если хотите
+разрешить зависимости например нестабильных пакетов.
+
 Example:
+Пример:
 
 ```json
 {
@@ -426,7 +433,12 @@ Example:
 If one of your dependencies has a dependency on an unstable package you need to
 explicitly require it as well, along with its sufficient stability flag.
 
+Если одна из зависимостей имеет зависимость от нестабильного пакета, то Вам нужно
+явно указать его, наряду с флагом стабильности.
+
 Example:
+
+Пример:
 
 ```json
 {
@@ -442,7 +454,14 @@ commit) for dev versions to make sure they are locked to a given state, even
 when you run update. These only work if you explicitly require a dev version
 and append the reference with `#<ref>`.
 
+`require` и `require-dev` дополнительно поддерживают явные ссылки (т.е.
+commit) для dev версий, чтобы убедиться, что они заблокированы для данного состояния, даже
+когда Вы запустите обновление. Это работает только если явно указана версия dev
+и добавлена ссылка с `#<ref>`.
+
 Example:
+
+Пример:
 
 ```json
 {
@@ -460,14 +479,25 @@ Example:
 > workaround, and you should always try to switch to tagged releases as soon
 > as you can.
 
+> **Примечание:** Хотя это удобно временами, не следует так использовать пакеты в долгосрочной перспективе потому, что это предоставляется с техническим ограничением. Composer.json метаданные будут по-прежнему читаться из названия ветки заданной перед хэшем. Из-за этого в некоторых случаях это не будет практическим решением и Вам всегда нужно будет переключаться между релизами.
+
 It is also possible to inline-alias a package constraint so that it matches
 a constraint that it otherwise would not. For more information [see the
 aliases article](articles/aliases.md).
 
+Это также возможно для inline псевдонимов, чтобы он соответствовал
+ограничениям, которого в противном случае не будет. Для получения дополнительной информации см.
+[aliases article](articles/aliases.md).
+
 `require` and `require-dev` also support references to specific PHP versions
 and PHP extensions your project needs to run successfully.
 
+`require` и `require-dev` также поддерживают ссылки на конкретные версии PHP
+и расширения PHP необходимые для успешного выполнения вашего проекта.
+
 Example:
+
+Пример:
 
 ```json
 {
@@ -483,22 +513,38 @@ Example:
 Lists packages required by this package. The package will not be installed
 unless those requirements can be met.
 
-#### require-dev <span>([root-only](04-schema.md#root-package))</span>
+Список пакетов необходимых для этого пакета. Пакет не будет установлен
+если эти требования не могут быть удовлетворены.
+
+#### require-dev <span>(только для [корневого пакета](04-schema.md#root-package))</span>
 
 Lists packages required for developing this package, or running
 tests, etc. The dev requirements of the root package are installed by default.
 Both `install` or `update` support the `--no-dev` option that prevents dev
 dependencies from being installed.
 
+Список пакетов необходимых для разработки этого пакета или тестирования и др.
+По умолчанию устанавливаются dev зависимости корневого пакета.
+Обе команды `install` или `update` поддерживают вариант `--no-dev` который предотвращает установку dev
+зависимостей.
+
 #### conflict
 
 Lists packages that conflict with this version of this package. They
 will not be allowed to be installed together with your package.
 
+Список пакетов которые конфликтуют с этой версией этого пакета. Они
+не могут быть установлены вместе с Вашим пакетом.
+
 Note that when specifying ranges like `<1.0 >=1.1` in a `conflict` link,
 this will state a conflict with all versions that are less than 1.0 *and* equal
 or newer than 1.1 at the same time, which is probably not what you want. You
 probably want to go for `<1.0 || >=1.1` in this case.
+
+Обратите внимание, что при указании диапазонов таких как `<1.0 >=1.1` в `conflict` ссылке,
+Это будет утверждать конфликт со всеми версиями, которые являются менее 1.0 *и* равных
+или новее чем 1.1 в то время, что это является, вероятннее всего, не тем, что вы хотите. Вы
+вероятно хотите указать `<1.0 || >=1.1` в данном случае.
 
 #### replace
 
@@ -507,16 +553,31 @@ package, publish it under a different name with its own version numbers, while
 packages requiring the original package continue to work with your fork because
 it replaces the original package.
 
+Список пакетов которые заменяются на этот пакет. Это позволяет Вам сделать форк
+пакета, опубликовать его под другим именем со своими собственными номерами версий, в то время как
+пакеты, требующие исходный пакет по-прежнему будут работать с вашей вилкой, потому что
+она заменяет исходный пакет.
+
 This is also useful for packages that contain sub-packages, for example the main
 symfony/symfony package contains all the Symfony Components which are also
 available as individual packages. If you require the main package it will
 automatically fulfill any requirement of one of the individual components,
 since it replaces them.
 
+Это также полезно для пакетов, которые содержат вложенные пакеты, например основной
+Symfony/symfony пакет содержит все компоненты Symfony, которые также
+доступны как отдельные пакеты. Если Вам требуется основной пакет это
+автоматически выполнит любые зависимости одного из отдельных компонентов,
+поскольку он заменяет их.
+
 Caution is advised when using replace for the sub-package purpose explained
 above. You should then typically only replace using `self.version` as a version
 constraint, to make sure the main package only replaces the sub-packages of
 that exact version, and not any other version, which would be incorrect.
+
+Осторожно при использовании замены для вложенных пакетов.
+Вы должны затем обычно заменять только с помощью `self.version` как версия
+ограничения, чтобы убедиться, что основной пакет заменяет только точные версии вложенных пакетов, а не любые другие версии, которые могут быть неверными.
 
 #### provide
 
