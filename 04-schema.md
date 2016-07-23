@@ -342,7 +342,11 @@ Optional, but highly recommended.
 
 Various information to get support about the project.
 
+Различные сведения для получения поддержки проекта.
+
 Support information includes the following:
+
+Информация о поддержке включает в себя следующее:
 
 * **email:** Email address for support.
 * **issues:** URL to the issue tracker.
@@ -353,7 +357,17 @@ Support information includes the following:
 * **docs:** URL to the documentation.
 * **rss:** URL to the RSS feed.
 
+* **email:** Адрес электронной почты поддержки.
+* **issues:** URL-адрес в системе отслеживания проблем.
+* **forum:** URL-адрес форума.
+* **wiki:** URL-адрес wiki.
+* **irc:** IRC канал поддержки, например irc://server/channel.
+* **source:** URL-адрес, чтобы просмотреть или скачать исходники.
+* **docs:** URL-адрес документации.
+* **rss:** URL-адрес RSS-канала.
+
 An example:
+Пример:
 
 ```json
 {
@@ -366,12 +380,19 @@ An example:
 
 Optional.
 
-### Package links
+Необязательное поле.
+
+### Package links - Ссылки на пакеты
 
 All of the following take an object which maps package names to
 [version constraints](01-basic-usage.md#package-versions).
 
+Все следующее принимает объект, который сопоставляет имена пакетов с их
+[ограничениями версий](01-basic-usage.md#package-versions).
+
 Example:
+
+Пример:
 
 ```json
 {
@@ -382,6 +403,8 @@ Example:
 ```
 
 All links are optional fields.
+
+Все ссылки являются обязательными полями.
 
 `require` and `require-dev` additionally support stability flags ([root-only](04-schema.md#root-package)).
 These allow you to further restrict or expand the stability of a package beyond
