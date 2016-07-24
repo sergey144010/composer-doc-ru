@@ -586,6 +586,11 @@ useful for common interfaces. A package could depend on some virtual
 `logger` package, any library that implements this logger interface would
 simply list it in `provide`.
 
+Список других пакетов которые предоставляет этот пакет. Это в основном
+полезно для общих интерфейсов. Пакет может зависеть от некоторого виртуального
+пакета `logger`, любой библиотеки которая реализует этот интерфейс. Регистратор включит
+просто его в список `provide`.
+
 #### suggest
 
 Suggested packages that can enhance or work well with this package. These are
@@ -593,10 +598,18 @@ just informational and are displayed after the package is installed, to give
 your users a hint that they could add more packages, even though they are not
 strictly required.
 
+Предлагаемые пакеты которые могут быть добавлены или работают хорошо вместе с этим пакетом. Это
+просто информация она отображается после установки пакета, чтобы дать
+пользователю намёк на то, что он мог-бы добавить больше пакетов, даже несмотря на то, что они не являются
+обязательными.
+
 The format is like package links above, except that the values are free text
 and not version constraints.
 
+Используется формат как по ссылки выше для пакетов, за исключением того, что вместо значения версии ограничения используется свободный текст.
+
 Example:
+Пример:
 
 ```json
 {
@@ -610,10 +623,17 @@ Example:
 
 Autoload mapping for a PHP autoloader.
 
+Карта автозагрузки для автозагрузкика PHP.
+
 Currently [`PSR-0`](http://www.php-fig.org/psr/psr-0/) autoloading,
 [`PSR-4`](http://www.php-fig.org/psr/psr-4/) autoloading, `classmap` generation and
 `files` includes are supported. PSR-4 is the recommended way though since it offers
 greater ease of use (no need to regenerate the autoloader when you add classes).
+
+В настоящее время поддерживаются [`PSR-0`](http://www.php-fig.org/psr/psr-0/) автозагрузка,
+[`PSR-4`](http://www.php-fig.org/psr/psr-4/) автозагрузка,
+генерирование `classmap` и `files`.
+PSR-4 является рекомендуемым, так как он более прост в использовании (не нужно регенерировать автозагрузчик при добавлении новых классов).
 
 #### PSR-4
 
@@ -623,15 +643,30 @@ package root. When autoloading a class like `Foo\\Bar\\Baz` a namespace prefix
 file named `src/Bar/Baz.php` and include it if present. Note that as opposed to
 the older PSR-0 style, the prefix (`Foo\\`) is **not** present in the file path.
 
+Под `psr-4` подразумевается сопоставление пути из пространства имён относительно корня пакета.
+Когда происходит автозагрузка класса с пространством имён таким как `Foo\\Bar\\Baz` префикс `Foo\\`
+указывает на каталог `src/` и подразумевает, что автозагрузчик будет искать файл с именем `src/Bar/Baz.php`
+и включит его если он присутствует.
+Обратите внимание, что в отличие от старого стиля PSR-0, префикс (`Foo\\`) **не** присутствует в пути к файлу.
+
 Namespace prefixes must end in `\\` to avoid conflicts between similar prefixes.
 For example `Foo` would match classes in the `FooBar` namespace so the trailing
 backslashes solve the problem: `Foo\\` and `FooBar\\` are distinct.
+
+Префиксы пространств имен должны заканчиваться `\\` чтобы избежать конфликтов между аналогичными префиксами.
+Например `Foo` присутствует в пространстве имен `FooBar`.
+Обратные косые черты решают эту проблему: `Foo\\` и `FooBar\\` различны.
 
 The PSR-4 references are all combined, during install/update, into a single
 key => value array which may be found in the generated file
 `vendor/composer/autoload_psr4.php`.
 
+Все PSR-4 ссылки объединяются во время установки/обновления в единый массив
+ключи => значения, которые могут быть найдены в созданном файле
+`vendor/composer/autoload_psr4.php`.
+
 Example:
+Пример:
 
 ```json
 {
@@ -647,6 +682,9 @@ Example:
 If you need to search for a same prefix in multiple directories,
 you can specify them as an array as such:
 
+Если Вам нужен поиск одинаковых префиксов в нескольких каталогах,
+их можно указать в качестве массива таким образом:
+
 ```json
 {
     "autoload": {
@@ -657,6 +695,9 @@ you can specify them as an array as such:
 
 If you want to have a fallback directory where any namespace will be looked for,
 you can use an empty prefix like:
+
+Если Вы хотите иметь резервный каталог, где будет происходить поиск любых пространств имен,
+Вы можете использовать пустой префикс как:
 
 ```json
 {
