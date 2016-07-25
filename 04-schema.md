@@ -873,14 +873,24 @@ Example:
 
 This section allows to define autoload rules for development purposes.
 
+Этот раздел позволяет определить правила автозагрузки для нужд разработки.
+
 Classes needed to run the test suite should not be included in the main autoload
 rules to avoid polluting the autoloader in production and when other people use
 your package as a dependency.
 
+Классы необходимые для запуска тестов не следует включать в правила основной автозагрузки,
+чтобы избежать загрязнения автозагрузчика в рабочем режиме, и когда другие люди используют
+ваш пакет как зависимость.
+
 Therefore, it is a good idea to rely on a dedicated path for your unit tests
 and to add it within the autoload-dev section.
 
+Таким образом это хорошая идея полагаться на выделенный путь для модульных тестов
+и добавить их в секцию autoload-dev автозагрузки.
+
 Example:
+Пример:
 
 ```json
 {
