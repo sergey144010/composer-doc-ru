@@ -697,7 +697,7 @@ If you want to have a fallback directory where any namespace will be looked for,
 you can use an empty prefix like:
 
 Если Вы хотите иметь резервный каталог, где будет происходить поиск любых пространств имен,
-Вы можете использовать пустой префикс как:
+Вы можете использовать пустой префикс так как показано ниже:
 
 ```json
 {
@@ -712,14 +712,26 @@ you can use an empty prefix like:
 Under the `psr-0` key you define a mapping from namespaces to paths, relative to the
 package root. Note that this also supports the PEAR-style non-namespaced convention.
 
+Под `psr-0` подразумевается сопоставление пути из пространства имён относительно корня пакета.
+Обратите внимание, что это также поддерживает конвенцию не пространств имён PEAR-style.
+
 Please note namespace declarations should end in `\\` to make sure the autoloader
 responds exactly. For example `Foo` would match in `FooBar` so the trailing
 backslashes solve the problem: `Foo\\` and `FooBar\\` are distinct.
 
+Пожалуйста обратите внимание объявления пространств имен следует завершать `\\`.
+Например `Foo` будет входить в `FooBar`, таким образом
+обратные косые черты решают проблему: `Foo\\` и `FooBar\\` различны.
+
 The PSR-0 references are all combined, during install/update, into a single key => value
 array which may be found in the generated file `vendor/composer/autoload_namespaces.php`.
 
+Все PSR-0 ссылки объединяются во время установки/обновления в единый массив
+ключи => значения, которые могут быть найдены в созданном файле
+`vendor/composer/autoload_namespaces.php`.
+
 Example:
+Пример:
 
 ```json
 {
@@ -736,6 +748,9 @@ Example:
 If you need to search for a same prefix in multiple directories,
 you can specify them as an array as such:
 
+Если Вам нужен поиск одинаковых префиксов в нескольких каталогах,
+их можно указать в качестве массива таким образом:
+
 ```json
 {
     "autoload": {
@@ -749,6 +764,10 @@ specified right down to the class level. This can be useful for libraries with
 only one class in the global namespace. If the php source file is also located
 in the root of the package, for example, it may be declared like this:
 
+PSR-0 стиль не ограничивается только объявлением пространств имен, здесь также можно указать
+вплоть до уровня класса. Это может быть полезно для библиотек только с одним классом в глобальном пространстве имен.
+Если также исходный файл php, например, расположен в корневом каталоге пакета, он может быть объявлен следующим образом:
+
 ```json
 {
     "autoload": {
@@ -759,6 +778,8 @@ in the root of the package, for example, it may be declared like this:
 
 If you want to have a fallback directory where any namespace can be, you can
 use an empty prefix like:
+
+Если Вы хотите иметь резервный каталог, где могут быть любые пространства имен, Вы можете использовать пустой префикс как:
 
 ```json
 {
@@ -775,11 +796,21 @@ key => value array which may be found in the generated file
 `vendor/composer/autoload_classmap.php`. This map is built by scanning for
 classes in all `.php` and `.inc` files in the given directories/files.
 
+Все `classmap` ссылки объединяются во время установки/обновления в единый массив
+ключи => значения, которые могут быть найдены в созданном файле
+`vendor/composer/autoload_classmap.php`.
+Эта карта построена путем сканирования классов всех файлов `.php` и `.inc` в каталоги/файлы.
+
 You can use the classmap generation support to define autoloading for all libraries
 that do not follow PSR-0/4. To configure this you specify all directories or files
 to search for classes.
 
+Вы можете использовать поддержку генерирования classmap для создания автозагрузчика для всех библиотек
+что не делается в PSR-0/4. Чтобы настроить это нужно указать все каталоги или файлы
+для поиска классов.
+
 Example:
+Пример:
 
 ```json
 {
@@ -795,7 +826,11 @@ If you want to require certain files explicitly on every request then you can us
 the 'files' autoloading mechanism. This is useful if your package includes PHP functions
 that cannot be autoloaded by PHP.
 
+Если Вы хотите требовать определенные файлы прямо на каждый запрос, то Вы можете использовать механизм
+автозагрузки файлов 'files'. Это полезно, если Ваш пакет включает в себя PHP функции которые не могут быть загружены через автозагрузку PHP.
+
 Example:
+Пример:
 
 ```json
 {
@@ -805,17 +840,26 @@ Example:
 }
 ```
 
-#### Exclude files from classmaps
+#### Exclude files from classmaps - Исключение файлов из classmaps
 
 If you want to exclude some files or folders from the classmap you can use the 'exclude-from-classmap' property.
 This might be useful to exclude test classes in your live environment, for example, as those will be skipped
 from the classmap even when building an optimized autoloader.
 
+Если Вы хотите исключить некоторые файлы или директории из classmap Вы можете использовать свойство 'exclude-from-classmap'.
+Это может быть полезно для исключения тестовых классов из реального окружения, например, как те которые будут пропущены
+из classmap даже при построении оптимизированного автозагрузчика.
+
 The classmap generator will ignore all files in the paths configured here. The paths are absolute from the package
 root directory (i.e. composer.json location), and support `*` to match anything but a slash, and `**` to
 match anything. `**` is implicitly added to the end of the paths.
 
+Classmap генератор будет игнорировать все файлы по пути, настроенные здесь. Пути являются абсолютными из
+корневого каталога пакета (то есть где находится composer.json) и поддерживают `*` для соответствия ничего кроме слеша, и `**` ничего.
+`**` неявно добавляется в конец пути.
+
 Example:
+Пример:
 
 ```json
 {
