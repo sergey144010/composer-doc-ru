@@ -1167,8 +1167,7 @@ handler, you can do:
 
 Произвольные дополнительные данные для потребления через `scripts`.
 
-Это может быть практически ничего. Для доступа к нему из сценария события
-обработчик, вы можете сделать:
+Этого может и буквально не быть. Для доступа из сценария используйте обработчик события:
 
 ```php
 $extra = $event->getComposer()->getPackage()->getExtra();
@@ -1183,23 +1182,40 @@ Optional.
 A set of files that should be treated as binaries and symlinked into the `bin-dir`
 (from config).
 
+Набор файлов, которые следует рассматривать как двоичные файлы и ссылки в `bin-dir`
+(из config).
+
 See [Vendor Binaries](articles/vendor-binaries.md) for more details.
 
+Смотреть [Vendor Binaries](articles/vendor-binaries.md) для получения более подробной информации.
+
 Optional.
+
+Необязательное свойство.
 
 ### archive
 
 A set of options for creating package archives.
 
+Набор параметров для создания архивов пакетов.
+
 The following options are supported:
+
+Поддерживаются следующие параметры:
 
 * **exclude:** Allows configuring a list of patterns for excluded paths. The
   pattern syntax matches .gitignore files. A leading exclamation mark (!) will
   result in any matching files to be included even if a previous pattern
   excluded them. A leading slash will only match at the beginning of the project
   relative path. An asterisk will not expand to a directory separator.
+  
+* **exclude:** Позволяет настроить список шаблонов для исключенных путей. Синтаксис сопоставим с синтаксисом файлов .gitignore.
+  Ведущий восклицательный знак (!) приведёт к тому, что любые соответствующие файлы быть включены даже если предыдущий шаблон
+  исключил их. Косая черта будет соответствовать только относительному пути корня проекта.
+  Звездочка не будет идти дальше внутрь указанных каталогов.
 
 Example:
+Пример:
 
 ```json
 {
@@ -1212,12 +1228,20 @@ Example:
 The example will include `/dir/foo/bar/file`, `/foo/bar/baz`, `/file.php`,
 `/foo/my.test` but it will exclude `/foo/bar/any`, `/foo/baz`, and `/my.test`.
 
+Пример включит `/dir/foo/bar/file`, `/foo/bar/baz`, `/file.php`,
+`/foo/my.test`, но исключит `/foo/bar/any`, `/foo/baz`, and `/my.test`.
+
 Optional.
+
+Необязательное свойство.
 
 ### non-feature-branches
 
 A list of regex patterns of branch names that are non-numeric (e.g. "latest" or something),
 that will NOT be handled as feature branches. This is an array of strings.
+
+Список имена шаблонов regex веток, которые являются нечисловыми (например "latest" или ещё что-то),
+не будут обрабатываться как функция ветви. Это массив строк.
 
 If you have non-numeric branch names, for example like "latest", "current", "latest-stable"
 or something, that do not look like a version number, then Composer handles such branches
@@ -1225,19 +1249,39 @@ as feature branches. This means it searches for parent branches, that look like 
 or ends at special branches (like master) and the root package version number becomes the
 version of the parent branch or at least master or something.
 
+Если у вас есть не числовые имена веток, например, как "latest", "current", "latest-stable"
+или что-либо ещё, что не выглядит как номер версии, Composer обрабатывает такие ветки
+как особенные ветви. Это означает, что он ищет родительскую ветвь, которая выглядит как версия
+или заканчивается специальная ветвь (как master) и номер версии корневого пакета
+превращается в версию родительской ветви, или по крайней мере master или другую.
+
 To handle non-numeric named branches as versions instead of searching for a parent branch
 with a valid version or special branch name like master, you can set patterns for branch
 names, that should be handled as dev version branches.
 
+Для обработки нечисловых имён ветвей как версий вместо поиска родительской ветви
+с допустимой версией или специальной ветки как master, можно задать шаблоны для имён веток,
+которые должны быть обработаны как ветви dev версии.
+
 This is really helpful when you have dependencies using "self.version", so that not dev-master,
 but the same branch is installed (in the example: latest-testing).
 
+Это очень полезно, когда у Вас есть зависимости использующие "self.version", так что это не dev-master,
+но установлены в той же ветви (например: latest-testing - последние тестирование).
+
 An example:
+
+Пример:
 
 If you have a testing branch, that is heavily maintained during a testing phase and is
 deployed to your staging environment, normally "composer show -s" will give you `versions : * dev-master`.
 
+Если у Вас есть тестовая ветвь, что сильно поддерживается на этапе тестирования и
+развернута в промежуточной среде, обычно "composer show -s" даст вам `versions : * dev-master`.
+
 If you configure `latest-.*` as a pattern for non-feature-branches like this:
+
+Если настроить `latest-.*` как шаблон для non-feature-branches так как этот:
 
 ```json
 {
@@ -1247,6 +1291,10 @@ If you configure `latest-.*` as a pattern for non-feature-branches like this:
 
 Then "composer show -s" will give you `versions : * dev-latest-testing`.
 
+"composer show -s" даст вам `versions : * dev-latest-testing`.
+
 Optional.
 
-&larr; [Command-line interface](03-cli.md)  |  [Repositories](05-repositories.md) &rarr;
+Необязательное свойство.
+
+&larr; [Интерфейс командной строки](03-cli.md)  |  [Репозитории](05-repositories.md) &rarr;
