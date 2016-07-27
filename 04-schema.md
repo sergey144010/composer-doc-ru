@@ -42,7 +42,7 @@ The config of dependencies is ignored. This makes the `config` field
 > fix a bug in it, then `monolog` is the root package.
 
 > **Примечание:** Пакет может быть корневым пакетом или не быть, в зависимости от контекста.
-> Например если Ваш проект зависит от библиотеки `monolog`, Ваш проект является корневым пакетом.
+> Например если Ваш проект зависит от библиотеки `monolog`, то Ваш проект является корневым пакетом.
 > Однако если Вы клонируете `monolog` из GitHub для того, чтобы исправить ошибку в нём, то тогда `monolog` является корневым пакетом.
 
 ## Properties
@@ -161,7 +161,7 @@ Out of the box, Composer supports four types:
   [SilverStripe installer](https://github.com/silverstripe/silverstripe-installer) или
   полноценных приложений распространяемых как пакеты. Это может например использоваться в IDE предоставляя
   список проектов для инициализации при создании новой рабочей области.
-- **metapackage:** Пустой пакет содержащий требования и выззывающий их установку, но не содержащий файлов, не будет писать что-либо в файловой системе. Таким образом он не зависит от dist или устанавливаемых исходных ключей.
+- **metapackage:** Пустой пакет содержащий зависимости и вызывающий их установку, но не содержащий файлов, не будет писать что-либо в файловой системе. Таким образом он не зависит от dist или устанавливаемых исходных ключей.
 - **composer-plugin:** Пакет типа `composer-plugin` может предоставить установщик для других пакетов, которые имеют пользовательский тип. Подробнее читайте в [dedicated article](articles/custom-installers.md).
 
 Only use a custom type if you need custom logic during installation. It is
@@ -909,7 +909,13 @@ Example:
 > should preferably use autoloading. As such it is a deprecated practice, but the
 > feature itself will not likely disappear from Composer.
 
+> **НЕРЕКОМЕНДУЕТСЯ**: Присутствует только для поддержки устаревших проектов, во всём новом коде
+> предпочтительнее следует использовать автозагрузку. Как таковое это свойство является устаревшей практикой, но
+> сама функция скорее всего не исчезнет из Composer.
+
 A list of paths which should get appended to PHP's `include_path`.
+
+Список путей из которых должны получать добавления к PHP `include_path`.
 
 Example:
 
@@ -921,16 +927,30 @@ Example:
 
 Optional.
 
+Необязательное свойство.
+
 ### target-dir
 
 > **DEPRECATED**: This is only present to support legacy PSR-0 style autoloading,
 > and all new code should preferably use PSR-4 without target-dir and projects
 > using PSR-0 with PHP namespaces are encouraged to migrate to PSR-4 instead.
 
+> **НЕРЕКОМЕНДУЕТСЯ**: Присутствует только для поддержки устаревшего PSR-0 стиля автозагрузки,
+> во всём новом коде предпочтительно следует использовать PSR-4 без target-dir и проекты
+> использующие PSR-0 стиль рекомендуется перевести на PSR-4.
+
 Defines the installation target.
+
+Определяет целевой объект установки.
 
 In case the package root is below the namespace declaration you cannot
 autoload properly. `target-dir` solves this problem.
+
+В случае, если корня пакета ниже объявление пространства имен вы нельзя
+автозагрузку должным образом. «Цель dir» решает эту проблему.
+
+В случае, если корневой пакет объявляет пространства имён и нельзя сделать автозагрузку должным образом.
+`target-dir` решает эту проблему.
 
 An example is Symfony. There are individual packages for the components. The
 Yaml component is under `Symfony\Component\Yaml`. The package root is that
@@ -939,7 +959,16 @@ is not installed into `vendor/symfony/yaml`, but instead into
 `vendor/symfony/yaml/Symfony/Component/Yaml`, so that the autoloader can load
 it from `vendor/symfony/yaml`.
 
+Примером является Symfony. Здесь есть отдельные пакеты для компонентов.
+YAML компонент находится в `Symfony\Component\Yaml`. Корнем пакета является каталог `Yaml`.
+Чтобы сделать автозагрузку возможной, нам нужно убедиться, что он
+не установится в `vendor/symfony/yaml`, а установится в
+`vendor/symfony/yaml/Symfony/Component/Yaml`, таким образом, чтобы автозагрузчик мог загрузить компонент
+из `vendor/symfony/yaml`.
+
 To do that, `autoload` and `target-dir` are defined as follows:
+
+Чтобы сделать это `autoload` and `target-dir` определяются следующим образом:
 
 ```json
 {
@@ -952,11 +981,17 @@ To do that, `autoload` and `target-dir` are defined as follows:
 
 Optional.
 
+Необязательное свойство.
+
 ### minimum-stability <span>([root-only](04-schema.md#root-package))</span>
 
 This defines the default behavior for filtering packages by stability. This
 defaults to `stable`, so if you rely on a `dev` package, you should specify
 it in your file to avoid surprises.
+
+Определяет поведение стабильности по умолчанию при фильтрации пакетов.
+По умолчанию установлено в `stable`, так что если Вы полагаетесь на `dev` пакет, то должны указать
+это в Вашем файле, чтобы избежать сюрпризов.
 
 All versions of each package are checked for stability, and those that are less
 stable than the `minimum-stability` setting will be ignored when resolving
@@ -964,8 +999,17 @@ your project dependencies. Specific changes to the stability requirements of
 a given package can be done in `require` or `require-dev` (see
 [package links](#package-links)).
 
+Все версии каждого пакета проверяются на стабильность и те, у которых параметр стабильность меньше
+чем `minimum-stability` будут игнорироваться при разрешении
+зависимостей проекта. Конкретные изменения к требованиям стабильности
+данного пакета могут быть сделаны в `require` или `require-dev` (см.
+[пакет ссылок](#package-links)).
+
 Available options (in order of stability) are `dev`, `alpha`, `beta`, `RC`,
 and `stable`.
+
+Доступные параметры (в порядке стабильности) `dev`, `alpha`, `beta`, `RC`,
+и `stable`.
 
 ### prefer-stable <span>([root-only](04-schema.md#root-package))</span>
 
@@ -974,20 +1018,36 @@ ones when finding compatible stable packages is possible. If you require a
 dev version or only alphas are available for a package, those will still be
 selected granted that the minimum-stability allows for it.
 
+Когда эта опция включена, Composer будет предпочитать более стабильные пакеты нестабильным,
+когда поиск совместимых стабильных пакетов возможен. Если Вам требуется разрешить
+для пакета dev версии или только alpha, минимальная стабильность позволяет зделать это.
+
 Use `"prefer-stable": true` to enable.
+
+Используйте `"prefer-stable": true` для включения.
 
 ### repositories <span>([root-only](04-schema.md#root-package))</span>
 
 Custom package repositories to use.
 
+Для использования пользовательских репозиториев пакетов.
+
 By default Composer just uses the packagist repository. By specifying
 repositories you can get packages from elsewhere.
+
+По умолчанию Composer просто использует хранилище packagist. Путем указания
+репозиториев Вы можете получать пакеты из других репозиториев.
 
 Repositories are not resolved recursively. You can only add them to your main
 `composer.json`. Repository declarations of dependencies' `composer.json`s are
 ignored.
 
+Репозитории не разрешены рекурсивно. Можно только добавлять их к вашему основному
+`composer.json`. Репозитории объявленные в зависимых `composer.json` будут проигнорированны.
+
 The following repository types are supported:
+
+Поддерживаются следующие типы репозиториев:
 
 * **composer:** A Composer repository is simply a `packages.json` file served
   via the network (HTTP, FTP, SSH), that contains a list of `composer.json`
@@ -1001,10 +1061,28 @@ The following repository types are supported:
 * **package:** If you depend on a project that does not have any support for
   composer whatsoever you can define the package inline using a `package`
   repository. You basically just inline the `composer.json` object.
+  
+  
+* **composer:** Composer репозиторий - это просто файл `packages.json` передаётся
+  через сеть (HTTP, FTP, SSH), содержащий список `composer.json`
+  объектов с дополнительной информацией о `dist` и/или `source`. `packages.json`
+  файл загружается с помощью PHP потока. Вы можете установить дополнительные опции в этом потоке
+  используя параметр `options`.
+* **vcs:** Система управления версиями репозиториев может получать пакеты из git,
+  svn, fossil и hg репозиториев.
+* **pear:** С этим можно импортировать любой pear репозиторий в Ваш Composer
+  проект.
+* **package:** Если Ва зависите от проекта, который не имеет никакой поддержки в
+  Composer, можно определить встроенный пакет, используя репозиторий `package`.
+  Вы основываетесь только на встроенном объекте `composer.json`.
 
 For more information on any of these, see [Repositories](05-repositories.md).
 
+Более подробную информацию о любых из них см. в [Репозитории](05-repositories.md).
+
 Example:
+
+Пример:
 
 ```json
 {
@@ -1055,10 +1133,18 @@ will look from the first to the last repository, and pick the first match.
 By default Packagist is added last which means that custom repositories can
 override packages from it.
 
+> **Примечание:** Здесь важен порядок. При поиске пакета Composer
+будет смотреть от первого до последнего репозитория и выбирать первый.
+По умолчанию Packagist добавляется последним, это означает, что пользовательскими
+хранилищами можно переопределять пакеты из него.
+
 ### config <span>([root-only](04-schema.md#root-package))</span>
 
 A set of configuration options. It is only used for projects. See
 [Config](06-config.md) for a description of each individual option.
+
+Набор параметров конфигурации. Он используется только для проектов. См.
+[Config](06-config.md) для описания каждого отдельного параметра.
 
 ### scripts <span>([root-only](04-schema.md#root-package))</span>
 
@@ -1067,6 +1153,11 @@ through the use of scripts.
 
 See [Scripts](articles/scripts.md) for events details and examples.
 
+Composer позволяет Вам сделать hook в различных частях процесса установки
+с помощью сценариев.
+
+Смотреть [Scripts](articles/scripts.md) для подробностей и примеров.
+
 ### extra
 
 Arbitrary extra data for consumption by `scripts`.
@@ -1074,11 +1165,18 @@ Arbitrary extra data for consumption by `scripts`.
 This can be virtually anything. To access it from within a script event
 handler, you can do:
 
+Произвольные дополнительные данные для потребления через `scripts`.
+
+Это может быть практически ничего. Для доступа к нему из сценария события
+обработчик, вы можете сделать:
+
 ```php
 $extra = $event->getComposer()->getPackage()->getExtra();
 ```
 
 Optional.
+
+Необязательное свойство.
 
 ### bin
 
