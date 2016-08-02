@@ -248,18 +248,30 @@ An example:
 The SHA-1 sum of the file allows it to be cached and only re-requested if the
 hash changed.
 
+Сумма SHA-1 файла обеспечивает его кэширование и запрашивается заново только если хэш изменился.
+
 This field is optional. You probably don't need it for your own custom
 repository.
 
-#### provider-includes and providers-url
+Это поле является необязательным. Вероятнее всего оно не требуется для собственных пользовательских
+репозиториев.
+
+#### provider-includes и providers-url
 
 For very large repositories like packagist.org using the so-called provider
 files is the preferred method. The `provider-includes` field allows you to
 list a set of files that list package names provided by this repository. The
 hash should be a sha256 of the files in this case.
 
+Для очень больших репозиториев как packagist.org использование так называемого поставщика
+файлов является предпочтительным методом. Поле `provider-includes` позволяет Вам
+перечислить набор файлов в которых перечислены имена пакетов представляемые этот репозиторий.
+
 The `providers-url` describes how provider files are found on the server. It
 is an absolute path from the repository root.
+
+`providers-url` описывает как найти поставщика файлов на сервере. 
+Это абсолютный путь от корня хранилища.
 
 An example:
 
@@ -280,6 +292,8 @@ An example:
 Those files contain lists of package names and hashes to verify the file
 integrity, for example:
 
+Эти файлы содержат списки имен пакетов и хэши для проверки целостности файла например:
+
 ```json
 {
     "providers": {
@@ -298,15 +312,27 @@ repository, by loading the file referenced by `providers-url`, replacing
 `%package%` by the package name and `%hash%` by the sha256 field. Those files
 themselves just contain package definitions as described [above](#packages).
 
+Приведенный выше файл заявляет, что acme/foo и acme/bar можно найти в этом
+репозитории, путем загрузки файла, на который ссылается `providers-url`, заменив
+`%package%` именем пакета и `%hash%` полем sha256. Эти файлы
+сами просто содержат определения пакетов как описано [above](#packages).
+
 This field is optional. You probably don't need it for your own custom
 repository.
 
-#### stream options
+Это поле является необязательным. Вероятнее всего оно не требуется для собственных пользовательских
+репозиториев.
+
+#### stream параметры
 
 The `packages.json` file is loaded using a PHP stream. You can set extra options
 on that stream using the `options` parameter. You can set any valid PHP stream
 context option. See [Context options and parameters](https://php.net/manual/en/context.php)
 for more information.
+
+`packages.json` файл загружается при помощи PHP потока. Можно задать дополнительные опции
+для этого потока с помощью параметра `options`. Вы можете задать любой допустимый параметр контекста для PHP потока.
+Смотрите [Контекстные опции и параметры](https://php.net/manual/en/context.php) для получения дополнительной информации.
 
 ### VCS
 
@@ -314,7 +340,12 @@ VCS stands for version control system. This includes versioning systems like
 git, svn, fossil or hg. Composer has a repository type for installing packages from
 these systems.
 
+VCS означает - системы управления версиями. Это включает в себя системы управления версиями, такие как
+git, svn, fossil или hg. Composer имеет тип репозитория для установки пакетов из этих систем.
+
 #### Loading a package from a VCS repository
+
+#### Загрузки пакета из VCS репозитория
 
 There are a few use cases for this. The most common one is maintaining your
 own fork of a third party library. If you are using a certain library for your
