@@ -1,14 +1,26 @@
 # Repositories
 
+# Репозитории
+
 This chapter will explain the concept of packages and repositories, what kinds
 of repositories are available, and how they work.
 
+Эта глава объяснит концепцию пакетов и репозиториев, какие
+из репозиториев доступны, и как они работают.
+
 ## Concepts
+
+## Концепции
 
 Before we look at the different types of repositories that exist, we need to
 understand some of the basic concepts that Composer is built on.
 
+Прежде чем мы посмотрим на различные типы репозиториев которые существуют, мы должны
+понимать некоторые основные концепции на которых построен Composer.
+
 ### Package
+
+### Пакет
 
 Composer is a dependency manager. It installs packages locally. A package is
 essentially just a directory containing something. In this case it is PHP
@@ -16,21 +28,42 @@ code, but in theory it could be anything. And it contains a package
 description which has a name and a version. The name and the version are used
 to identify the package.
 
+Composer — менеджер зависимостей. Он устанавливает пакеты локально.
+Пакетом по существу является только каталог, содержащий что-то.
+В данном случае это PHP код, но теоретически это может быть что угодно.
+И он содержит описание пакета, который имеет имя и версию.
+Имя и версия используются для идентификации пакета.
+
 In fact, internally Composer sees every version as a separate package. While
 this distinction does not matter when you are using Composer, it's quite
 important when you want to change it.
+
+В действительности, изнутрии Composer видит каждую версию как отдельный пакет.
+Хотя это различие не имеет значения когда Вы используете Composer, но это довольно
+важно когда Вы хотите его изменить.
 
 In addition to the name and the version, there is useful metadata. The information
 most relevant for installation is the source definition, which describes where
 to get the package contents. The package data points to the contents of the
 package. And there are two options here: dist and source.
 
+В дополнении к имени и версии есть полезные метаданные.
+Информацией наиболее актуальной при установке является нахождение исходников, которая описывает где можно взять содержимое пакета.
+Точки данных пакета в содержимом пакета. И здесь есть два варианта: dist и source.
+
 **Dist:** The dist is a packaged version of the package data. Usually a
 released version, usually a stable release.
+
+**Dist:** Dist является упакованной версией пакета данных. Обычно
+выпущенная версия, обычно стабильный релиз.
 
 **Source:** The source is used for development. This will usually originate
 from a source code repository, such as git. You can fetch this when you want
 to modify the downloaded package.
+
+**Source:** Source - источник, используется для разработки. Это обычно берётся
+из репозитория исходного кода, таких как git. Вы можете получить его когда Вы хотите
+что-либо изменить в загруженном пакете.
 
 Packages can supply either of these, or even both. Depending on certain
 factors, such as user-supplied options and stability of the package, one will
