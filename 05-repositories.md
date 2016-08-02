@@ -49,19 +49,19 @@ package. And there are two options here: dist and source.
 
 В дополнении к имени и версии есть полезные метаданные.
 Информацией наиболее актуальной при установке является нахождение исходников, которая описывает где можно взять содержимое пакета.
-Точки данных пакета в содержимом пакета. И здесь есть два варианта: dist и source.
+Точки данных пакета в содержимом пакета. И здесь есть два типа пакета: dist и source.
 
 **Dist:** The dist is a packaged version of the package data. Usually a
 released version, usually a stable release.
 
-**Dist:** Dist является упакованной версией пакета данных. Обычно
+**Dist:** Упакованная версия пакета данных. Обычно
 выпущенная версия, обычно стабильный релиз.
 
 **Source:** The source is used for development. This will usually originate
 from a source code repository, such as git. You can fetch this when you want
 to modify the downloaded package.
 
-**Source:** Source - источник, используется для разработки. Это обычно берётся
+**Source:** Источник, используется для разработки. Это обычно берётся
 из репозитория исходного кода, таких как git. Вы можете получить его когда Вы хотите
 что-либо изменить в загруженном пакете.
 
@@ -69,25 +69,49 @@ Packages can supply either of these, or even both. Depending on certain
 factors, such as user-supplied options and stability of the package, one will
 be preferred.
 
+В пакетах можно указать любой из них, или даже оба. В зависимости от определенных
+факторов, таких как пользовательские параметры и стабильности пакета, но указать один будет
+более предпочтительно.
+
 ### Repository
+
+### Репозиторий
 
 A repository is a package source. It's a list of packages/versions. Composer
 will look in all your repositories to find the packages your project requires.
 
+Репозиторий это источник пакета. Это список пакетов/версий.
+Composer будет смотреть во все ваши хранилища (репозитории), для того чтобы найти пакеты которые требует ваш проект.
+
 By default only the Packagist repository is registered in Composer. You can
 add more repositories to your project by declaring them in `composer.json`.
+
+По умолчанию только репозиторий Packagist зарегистрирован в Composer. Вы можете
+добавить дополнительные репозитории для вашего проекта объявив их в `composer.json`.
 
 Repositories are only available to the root package and the repositories
 defined in your dependencies will not be loaded. Read the
 [FAQ entry](faqs/why-can't-composer-load-repositories-recursively.md) if you
 want to learn why.
 
+Репозитории доступны только для корневого пакета, а репозитории
+определенные в зависимостях загружены не будут.
+Читайте [FAQ entry](faqs/why-can't-composer-load-repositories-recursively.md) если
+хотите узнать, почему.
+
 ## Types
+
+## Типы
+
+### Composer
 
 ### Composer
 
 The main repository type is the `composer` repository. It uses a single
 `packages.json` file that contains all of the package metadata.
+
+Основным типом репозитория является `composer` репозиторий. Он использует единичный
+`packages.json` файл который содержит все метаданные пакета.
 
 This is also the repository type that packagist uses. To reference a
 `composer` repository, just supply the path before the `packages.json` file.
@@ -95,9 +119,16 @@ In case of packagist, that file is located at `/packages.json`, so the URL of
 the repository would be `packagist.org`. For `example.org/packages.json` the
 repository URL would be `example.org`.
 
+Это также тип репозитория используемый Packagist.
+Ссылка `composer` репозитория просто указывает на путь до файла `packages.json`.
+В случае packagist этот файл расположен в `/packages.json` поэтому URL-адрес
+репозитория будет `packagist.org`. Для репозитория `example.org/packages.json` URL будет `example.org`.
+
 #### packages
 
 The only required field is `packages`. The JSON structure is as follows:
+
+Единственное обязательное поле — `packages`. Структура JSON выглядит следующим образом:
 
 ```json
 {
@@ -115,11 +146,15 @@ The only required field is `packages`. The JSON structure is as follows:
 The `@composer.json` marker would be the contents of the `composer.json` from
 that package version including as a minimum:
 
+Маркер `@composer.json` будет содержать `composer.json` из этой версии пакета включая как минимум:
+
 * name
 * version
-* dist or source
+* dist или source
 
 Here is a minimal package definition:
+
+Вот определение минимального пакета:
 
 ```json
 {
@@ -134,13 +169,21 @@ Here is a minimal package definition:
 
 It may include any of the other fields specified in the [schema](04-schema.md).
 
+Он может включать в себя любое из других полей указанных в [схеме](04-schema.md).
+
 #### notify-batch
 
 The `notify-batch` field allows you to specify a URL that will be called
 every time a user installs a package. The URL can be either an absolute path
 (that will use the same domain as the repository) or a fully qualified URL.
 
+Поле `notify-batch` позволяет указать URL-адрес который будет вызываться
+каждый раз когда пользователь устанавливает пакет. URL-адрес может быть либо абсолютный путь
+(который будет использовать тот же домен который и репозиторий) или полный URL-адрес.
+
 An example value:
+
+Пример значения:
 
 ```json
 {
@@ -151,6 +194,9 @@ An example value:
 For `example.org/packages.json` containing a `monolog/monolog` package, this
 would send a `POST` request to `example.org/downloads/` with following
 JSON request body:
+
+Для `example.org/packages.json` содержащий пакет `monolog/monolog`, это пошлёт `POST` запрос на `example.org/downloads/` со следующим
+JSON телом запроса:
 
 ```json
 {
@@ -163,7 +209,11 @@ JSON request body:
 The version field will contain the normalized representation of the version
 number.
 
+В поле версия будет содержаться нормализованное представление номера версии.
+
 This field is optional.
+
+Это поле является необязательным.
 
 #### includes
 
@@ -171,7 +221,13 @@ For larger repositories it is possible to split the `packages.json` into
 multiple files. The `includes` field allows you to reference these additional
 files.
 
+Для крупных репозиториев можно разделить `packages.json` на
+несколько файлов. Поле `includes` позволяет ссылаться на эти дополнительные
+файлы.
+
 An example:
+
+Пример:
 
 ```json
 {
