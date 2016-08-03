@@ -345,7 +345,7 @@ git, svn, fossil или hg. Composer имеет тип репозитория д
 
 #### Loading a package from a VCS repository
 
-#### Загрузки пакета из VCS репозитория
+#### Загрузка пакета из VCS репозитория
 
 There are a few use cases for this. The most common one is maintaining your
 own fork of a third party library. If you are using a certain library for your
@@ -357,7 +357,19 @@ to do is add your fork as a repository and update the version constraint to
 point to your custom branch. Your custom branch name must be prefixed with `"dev-"`. For version constraint naming conventions see
 [Libraries](02-libraries.md) for more information.
 
+Есть несколько вариантов. Наиболее распространенным является сделать Вашу
+собственную ветвь сторонней библиотеки. Например если Вы используете определенные библиотеки для Вашего
+проекта и Вы решили изменить что-то в какой-либо библиотеке и хотите использовать исправленную версию
+в проекте. Если библиотека находится на GitHub (это случается наиболее часто)
+Вы можете просто ответвить её там и отправить Ваши изменения в Вашу ветвь.
+После этого Вы обновляете `composer.json` проекта. Все что вам нужно
+чтобы сделать это - добавить Вашу ветвь как репозиторий указав Вашу пользовательскую ветвь и обновить ограничение версии.
+Имени Вашей пользовательской ветви должно предшествовать `"dev-"`. Для наименования версии ограничения см.
+[Библиотеки](02-libraries.md) для получения дополнительной информации.
+
 Example assuming you patched monolog to fix a bug in the `bugfix` branch:
+
+Например, предположим, что Вы нашли и исправили ошибку в monolog в своей ветке `bugfix`:
 
 ```json
 {
@@ -375,6 +387,9 @@ Example assuming you patched monolog to fix a bug in the `bugfix` branch:
 
 When you run `php composer.phar update`, you should get your modified version
 of `monolog/monolog` instead of the one from packagist.
+
+Когда Вы запустите `php composer.phar update`, вы должны получить Вашу измененную версию
+из `monolog/monolog` вместо основной из packagist.
 
 Note that you should not rename the package unless you really intend to fork
 it in the long term, and completely move away from the original package.
