@@ -388,7 +388,7 @@ Example assuming you patched monolog to fix a bug in the `bugfix` branch:
 When you run `php composer.phar update`, you should get your modified version
 of `monolog/monolog` instead of the one from packagist.
 
-Когда Вы запустите `php composer.phar update`, вы должны получить Вашу измененную версию
+Когда Вы запустите `php composer.phar update`, Вы должны получить Вашу измененную версию
 из `monolog/monolog` вместо основной из packagist.
 
 Note that you should not rename the package unless you really intend to fork
@@ -398,18 +398,35 @@ custom repository has priority over packagist. If you want to rename the
 package, you should do so in the default (often master) branch and not in a
 feature branch, since the package name is taken from the default branch.
 
+Обратите внимание, что Вам не следует переименовывать пакет и полностью отказываться от оригинального пакета, если Вы действительно намерены делать форк в долгосрочной перспективе.
+Composer будет правильно выбирать Ваш пакет поверх оригинального из
+пользовательского хранилища, оно имеет приоритет над packagist. Если Вы хотите переименовать
+пакет, Вы должны делать это в ветке по умолчанию (часто master), а не в
+других ветках, поскольку из ветки по умолчанию берётся имя пакета.
+
 Also note that the override will not work if you change the `name` property
 in your forked repository's `composer.json` file as this needs to match the
 original for the override to work.
+
+Также, обратите внимание, что переопределение не будет работать, если Вы измените свойство `name` в Вашей ветке репозиториев
+в файле `composer.json` , как это должно соответствовать первоначальному определению для работы.
 
 If other dependencies rely on the package you forked, it is possible to
 inline-alias it so that it matches a constraint that it otherwise would not.
 For more information [see the aliases article](articles/aliases.md).
 
+Если другие зависимости полагаются на пакет который Вы разветвили, возможно сделать
+inline-alias так что-бы он соответствовал ограничениям.
+Для получения дополнительной информации см. [псевдонимы article](articles/aliases.md).
+
 #### Using private repositories
+#### Использование частных репозиториев
 
 Exactly the same solution allows you to work with your private repositories at
 GitHub and BitBucket:
+
+Так-же аналогичное решение позволяет работать с Вашими частными репозиториями на
+GitHub и BitBucket:
 
 ```json
 {
@@ -427,10 +444,17 @@ GitHub and BitBucket:
 
 The only requirement is the installation of SSH keys for a git client.
 
+Единственным требованием является установка SSH-ключей для git клиента.
+
 #### Git alternatives
+
+#### Альтернативы Git
 
 Git is not the only version control system supported by the VCS repository.
 The following are supported:
+
+Git является не единственной версией систем управления поддерживаемой через VCS репозиторий.
+Поддерживаются следующие:
 
 * **Git:** [git-scm.com](https://git-scm.com)
 * **Subversion:** [subversion.apache.org](https://subversion.apache.org)
@@ -442,6 +466,11 @@ installed. That can be inconvenient. And for this reason there is special
 support for GitHub and BitBucket that use the APIs provided by these sites, to
 fetch the packages without having to install the version control system. The
 VCS repository provides `dist`s for them that fetch the packages as zips.
+
+Чтобы получить пакеты из этих систем необходимо иметь установленными их соответствующие клиенты.
+Это может быть неудобно. И по этой причине существует специальная поддержка GitHub и BitBucket, которые используют API,
+предоставляемые этими сайтами, чтобы получать пакеты без установки системы управления версиями.
+VCS репозиторий обеспечивает `dist` для них который получает пакеты как молнии.
 
 * **GitHub:** [github.com](https://github.com) (Git)
 * **BitBucket:** [bitbucket.org](https://bitbucket.org) (Git and Mercurial)
