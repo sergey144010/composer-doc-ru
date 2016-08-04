@@ -503,6 +503,12 @@ by default that code is located in `$url/trunk`, `$url/branches` and
 values. For example if you used capitalized names you could configure the
 repository like this:
 
+Поскольку Subversion не имеет собственной концепции веток и меток, Composer предполагает
+по умолчанию, что код находится в `$url/trunk`, `$url/branches` и
+`$url/tags`. Если Ваше хранилище имеет другой формат можно изменить эти
+значения. Например, если Вы использовали названия через прописные буквы, то можно настроить
+репозитории следующим образом:
+
 ```json
 {
     "repositories": [
@@ -519,6 +525,9 @@ repository like this:
 
 If you have no branches or tags directory you can disable them entirely by
 setting the `branches-path` or `tags-path` to `false`.
+
+Если у Вас есть не ветки или директории тегов Вы можете отключить через
+настройки `branches-path` или `tags-path` в `false`.
 
 If the package is in a sub-directory, e.g. `/trunk/foo/bar/composer.json` and
 `/tags/1.0/foo/bar/composer.json`, then you can make Composer access it by
