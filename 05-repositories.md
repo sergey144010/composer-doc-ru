@@ -479,12 +479,23 @@ The VCS driver to be used is detected automatically based on the URL. However,
 should you need to specify one for whatever reason, you can use `fossil`, `git`, 
 `svn` or `hg` as the repository type instead of `vcs`.
 
+VCS драйвер необходимый для использования определяется автоматически на основе URL-адреса. Однако,
+если Вам необходимо указать только один по любой причине, Вы можете использовать `fossil`, `git`, 
+`svn` или `hg` как тип репозитория вместо `vcs`.
+
 If you set the `no-api` key to `true` on a github repository it will clone the
 repository as it would with any other git repository instead of using the
 GitHub API. But unlike using the `git` driver directly, Composer will still
 attempt to use github's zip files.
 
+Если задать ключ `no-api` в значение `true` на github репозитории, это будет клонировать
+репозиторий как бы с другими репозиториями вместо использования
+GitHub API. Но в отличие от непосредственного использования с помощью драйвера `git`, Composer будет по-прежнему
+пытаться использовать github zip-файлы.
+
 #### Subversion Options
+
+#### Subversion опции
 
 Since Subversion has no native concept of branches and tags, Composer assumes
 by default that code is located in `$url/trunk`, `$url/branches` and
@@ -843,7 +854,12 @@ variables are parsed in both Windows and Linux/Mac notations. For example
 
 ## Disabling Packagist
 
+## Отключение Packagist
+
 You can disable the default Packagist repository by adding this to your
+`composer.json`:
+
+Можно отключить хранилище Packagist по умолчанию, добавив это в Ваш
 `composer.json`:
 
 ```json
