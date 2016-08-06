@@ -526,7 +526,7 @@ repository like this:
 If you have no branches or tags directory you can disable them entirely by
 setting the `branches-path` or `tags-path` to `false`.
 
-Если у Вас есть не ветки или директории тегов Вы можете отключить через
+Если у Вас нет веток или директорий тегов Вы это можете отключить через
 настройки `branches-path` или `tags-path` в `false`.
 
 If the package is in a sub-directory, e.g. `/trunk/foo/bar/composer.json` and
@@ -534,8 +534,15 @@ If the package is in a sub-directory, e.g. `/trunk/foo/bar/composer.json` and
 setting the `"package-path"` option to the sub-directory, in this example it
 would be `"package-path": "foo/bar/"`.
 
+Если пакет находится в поддиректории, например `/trunk/foo/bar/composer.json` и
+`/tags/1.0/foo/bar/composer.json` Вы можете сделать доступ к нему через параметр
+`"package-path"`, в этом примере это будет `"package-path": "foo/bar/"`.
+
 If you have a private Subversion repository you can save credentials in the
 http-basic section of your config (See [Schema](04-schema.md)):
+
+Если у Вас есть личные Subversion репозитории можно сохранить учетные данные в
+http-basic секции вашего config (см. [схема](04-schema.md)):
 
 ```json
 {
@@ -552,6 +559,11 @@ If your Subversion client is configured to store credentials by default these
 credentials will be saved for the current user and existing saved credentials
 for this server will be overwritten. To change this behavior by setting the
 `"svn-cache-credentials"` option in your repository configuration:
+
+Если Ваш клиент Subversion настроен на хранение учетных данных по умолчанию, эти
+учетные данные будут сохранены для текущего пользователя и существующие сохраненные учетные данные
+для этого сервера будут перезаписаны. Чтобы изменить это поведение, установите
+параметр `"svn-cache-credentials"` в конфигурации Вашего репозитория:
 
 ```json
 {
