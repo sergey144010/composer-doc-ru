@@ -583,7 +583,13 @@ It is possible to install packages from any PEAR channel by using the `pear`
 repository. Composer will prefix all package names with `pear-{channelName}/` to
 avoid conflicts. All packages are also aliased with prefix `pear-{channelAlias}/`
 
+Позволяет устанавливать пакеты из любого PEAR канала с помощью `pear` репозитория.
+Composer добавит префикс всем именам пакетов на `pear-{channelName}/` во избежании конфликтов.
+Все пакеты являются также псевдонимами с префиксом `pear-{channelAlias}/`
+
 Example using `pear2.php.net`:
+
+Пример использования `pear2.php.net`:
 
 ```json
 {
@@ -603,22 +609,35 @@ Example using `pear2.php.net`:
 In this case the short name of the channel is `pear2`, so the
 `PEAR2_HTTP_Request` package name becomes `pear-pear2/PEAR2_HTTP_Request`.
 
+В этом случае коротким именем канала является `pear2`, так имя пакета
+`PEAR2_HTTP_Request` становится `pear-pear2/PEAR2_HTTP_Request`.
+
 > **Note:** The `pear` repository requires doing quite a few requests per
 > package, so this may considerably slow down the installation process.
 
-#### Custom vendor alias
+> **Примечание:** `pear` репозиторий требует делать довольно много запросов на
+> пакет, так что это может значительно замедлить процесс установки.
+
+#### Custom vendor alias - Псевдоним пользовательского поставщика
 
 It is possible to alias PEAR channel packages with a custom vendor name.
 
+Возможность псевдонимов пакетов PEAR канала с именем пользовательского поставщика.
+
 Example:
+Пример:
 
 Suppose you have a private PEAR repository and wish to use Composer to
 incorporate dependencies from a VCS. Your PEAR repository contains the
 following packages:
 
+Предположим, у Вас есть личный PEAR репозиторий и Вы хотите использовать Composer
+включить зависимости из VCS. Ваш PEAR репозиторий содержит
+следующие пакеты:
+
  * `BasePackage`
- * `IntermediatePackage`, which depends on `BasePackage`
- * `TopLevelPackage1` and `TopLevelPackage2` which both depend on `IntermediatePackage`
+ * `IntermediatePackage`, который зависит от `BasePackage`
+ * `TopLevelPackage1` и `TopLevelPackage2` которые оба зависят от `IntermediatePackage`
 
 Without a vendor alias, Composer will use the PEAR channel name as the
 vendor portion of the package name:
