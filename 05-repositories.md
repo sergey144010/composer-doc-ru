@@ -642,6 +642,9 @@ following packages:
 Without a vendor alias, Composer will use the PEAR channel name as the
 vendor portion of the package name:
 
+Без псевдонима вендора Composer будет использовать имя PEAR канала как
+часть имени пакета вендора:
+
  * `pear-pear.foobar.repo/BasePackage`
  * `pear-pear.foobar.repo/IntermediatePackage`
  * `pear-pear.foobar.repo/TopLevelPackage1`

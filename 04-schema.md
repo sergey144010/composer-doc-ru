@@ -999,7 +999,7 @@ your project dependencies. Specific changes to the stability requirements of
 a given package can be done in `require` or `require-dev` (see
 [package links](#package-links)).
 
-Все версии каждого пакета проверяются на стабильность и те, у которых параметр стабильность меньше
+Все версии каждого пакета проверяются на стабильность и те у которых параметр стабильность меньше
 чем `minimum-stability` будут игнорироваться при разрешении
 зависимостей проекта. Конкретные изменения к требованиям стабильности
 данного пакета могут быть сделаны в `require` или `require-dev` (см.
@@ -1018,9 +1018,9 @@ ones when finding compatible stable packages is possible. If you require a
 dev version or only alphas are available for a package, those will still be
 selected granted that the minimum-stability allows for it.
 
-Когда эта опция включена, Composer будет предпочитать более стабильные пакеты нестабильным,
+Когда эта опция включена Composer будет предпочитать более стабильные пакеты нестабильным,
 когда поиск совместимых стабильных пакетов возможен. Если Вам требуется разрешить
-для пакета dev версии или только alpha, минимальная стабильность позволяет зделать это.
+для пакета и dev версии или только alpha, минимальная стабильность (minimum-stability) позволяет сделать это.
 
 Use `"prefer-stable": true` to enable.
 
